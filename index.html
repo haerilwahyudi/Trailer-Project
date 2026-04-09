@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineCut Studio - Professional Trailer Editing</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts (Cinematic Look) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e50914; /* Netflix Red vibe */
+            --dark-bg: #0a0a0a;
+            --secondary-bg: #141414;
+            --text-light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        .nav-link {
+            color: #ccc !important;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/1600x900/?cinema,film');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: transform 0.2s;
+        }
+        .btn-custom:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.05);
+        }
+        .btn-outline-custom {
+            border: 2px solid white;
+            color: white;
+            padding: 10px 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: transparent;
+        }
+        .btn-outline-custom:hover {
+            background-color: white;
+            color: black;
+        }
+
+        /* Section Styling */
+        .section-padding {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+        }
+
+        /* Services */
+        .service-card {
+            background-color: var(--secondary-bg);
+            border: 1px solid #333;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            transition: 0.3s;
+            height: 100%;
+        }
+        .service-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-10px);
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Portfolio */
+        .portfolio-item {
+            position: relative;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .portfolio-item img {
+            width: 100%;
+            transition: transform 0.5s;
+        }
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Stats */
+        .stats-section {
+            background-color: var(--secondary-bg);
+        }
+        .stat-item h2 {
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        /* Contact */
+        .contact-info i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        .form-control {
+            background-color: #222;
+            border: 1px solid #333;
+            color: white;
+        }
+        .form-control:focus {
+            background-color: #222;
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            padding: 20px 0;
+            text-align: center;
+            color: #777;
+        }
+        .social-icons a {
+            color: #777;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">CINECUT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="home" class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">We Create <span style="color: var(--primary-color)">Cinematic</span> Experiences</h1>
+            <p class="hero-subtitle">Professional Trailer Editing, Motion Graphics & Sound Design for Films, Games & Brands.</p>
+            <a href="#portfolio" class="btn btn-custom me-2">View Showreel</a>
+            <a href="#contact" class="btn btn-outline-custom">Get a Quote</a>
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="https://source.unsplash.com/600x400/?editor,video" alt="Editing Room" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <h2 class="mb-4">Storytelling Through Cuts & Beats</h2>
+                    <p style="color: #ccc; line-height: 1.8;">
+                        CineCut Studio adalah rumah bagi para editor kreatif yang berdedikasi menciptakan trailer yang memukau. Kami memahami bahwa trailer adalah janji pertama kepada penonton. 
+                        Dengan pengalaman lebih dari 10 tahun di industri, kami memadukan visual effects, musik scoring, dan pacing yang sempurna untuk memastikan pesan Anda tersampaikan dengan keras.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check-circle-fill text-danger me-2"></i> High-End Visual Effects</li>
+                        <li><i class="bi bi-check-circle-fill text-danger me-2"></i> Professional Color Grading</li>
+                        <li><i class="bi bi-check-circle-fill text-danger me-2"></i> Immersive Sound Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section-padding" style="background-color: #0f0f0f;">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="row">
+                <!-- Service 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-film"></i></div>
+                        <h5>Movie Trailer</h5>
+                        <p class="text-muted">Editing sinematik untuk film layar lebar, web series, dan dokumenter dengan standar Hollywood.</p>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-controller"></i></div>
+                        <h5>Game Trailer</h5>
+                        <p class="text-muted">Trailer gameplay dan cinematic yang menonjolkan mekanik game dan cerita yang menarik.</p>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-youtube"></i></div>
+                        <h5>YouTube Intro</h5>
+                        <p class="text-muted">Motion graphics dan intro yang eye-catching untuk branding channel YouTube Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Works</h2>
+            <div class="row">
+                <!-- Portfolio Item 1 -->
+                <div class="col-md-4 col-6">
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/400x300/?action,movie" alt="Project 1">
+                        <div class="portfolio-overlay">
+                            <div class="play-btn">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Portfolio Item 2 -->
+                <div class="col-md-4 col-6">
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/400x300/?horror" alt="Project 2">
+                        <div class="portfolio-overlay">
+                            <div class="play-btn">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Portfolio Item 3 -->
+                <div class="col-md-4 col-6">
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/400x300/?scifi" alt="Project 3">
+                        <div class="portfolio-overlay">
+                            <div class="play-btn">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Portfolio Item 4 -->
+                <div class="col-md-4 col-6">
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/400x300/?gaming" alt="Project 4">
+                        <div class="portfolio-overlay">
+                            <div class="play-btn">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Portfolio Item 5 -->
+                <div class="col-md-4 col-6">
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/400x300/?adventure" alt="Project 5">
+                        <div class="portfolio-overlay">
+                            <div class="play-btn">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Portfolio Item 6 -->
+                <div class="col-md-4 col-6">
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/400x300/?commercial" alt="Project 6">
+                        <div class="portfolio-overlay">
+                            <div class="play-btn">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="section-padding stats-section text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6 stat-item mb-4">
+                    <h2 class="counter">150+</h2>
+                    <p>Projects Done</p>
+                </div>
+                <div class="col-md-3 col-6 stat-item mb-4">
+                    <h2 class="counter">50+</h2>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <h2 class="counter">10</h2>
+                    <p>Awards Won</p>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <h2 class="counter">5k+</h2>
+                    <p>Hours Edited</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">What Clients Say</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <p class="mb-3" style="font-style: italic;">"Hasil edit trailernya luar biasa! Tim CineCut sangat memahami visi kami. Film kami jadi banyak ditonton karena trailernya yang keren."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://source.unsplash.com/50x50/?man" class="rounded-circle me-3" alt="Client">
+                            <div>
+                                <h6 class="mb-0">Budi Santoso</h6>
+                                <small style="color: #777;">Film Director</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <p class="mb-3" style="font-style: italic;">"Fast response dan hasil editing game trailer kami sangat memuaskan. Motion graphics-nya top markotop!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://source.unsplash.com/50x50/?woman" class="rounded-circle me-3" alt="Client">
+                            <div>
+                                <h6 class="mb-0">Anisa Rahman</h6>
+                                <small style="color: #777;">Game Producer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section-padding" style="background-color: #0f0f0f;">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h4>Let's Create Something Epic</h4>
+                    <p class="text-muted mb-4">Punya proyek trailer atau video editing? Hubungi kami untuk konsultasi gratis.</p>
+                    
+                    <div class="contact-info d-flex align-items-center mb-3">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Jl. Sinematografi No. 45, Jakarta Selatan</span>
+                    </div>
+                    <div class="contact-info d-flex align-items-center mb-3">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>hello@cinecutstudio.com</span>
+                    </div>
+                    <div class="contact-info d-flex align-items-center mb-3">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>+62 812 3456 7890</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Nama Anda">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email Anda">
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-control">
+                                <option>Pilih Layanan</option>
+                                <option>Movie Trailer</option>
+                                <option>Game Trailer</option>
+                                <option>Commercial Ads</option>
+                                <option>Youtube Intro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="4" placeholder="Detail Proyek..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-custom w-100">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="social-icons mb-3">
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+                <a href="#"><i class="bi bi-vimeo"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <p class="mb-0">&copy; 2023 CineCut Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Smooth Scroll Script -->
+    <script>
+        // Script untuk smooth scroll saat klik menu navbar
+        var scroll = new SmoothScroll('a[href*="#"]', {
+            speed: 800,
+            speedAsDuration: true
+        });
+
+        // Atau pakai vanilla JS jika tidak mau nambah library SmoothScroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
