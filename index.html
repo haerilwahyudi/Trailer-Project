@@ -3,412 +3,512 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trailer Project · Cinematic Game Trailers</title>
+    <title>Trailer Project · High-Conversion Game Trailers for Steam</title>
+    <meta name="description" content="Transform raw gameplay into high-converting cinematic trailers. Steam-compliant, Kickstarter-ready, and engineered to hook players in 5 seconds." />
 
     <!-- Bootstrap 5 + Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* ── reset / base ── */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        /* ── Reset / Base ── */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: #0b0b0b;
-            color: #eee;
+            background: #050505;
+            color: #e0e0e0;
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ── typography ── */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -0.3px;
+        a { text-decoration: none; color: inherit; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Sora', sans-serif;
+            letter-spacing: -0.5px;
             font-weight: 800;
         }
 
-        .text-accent {
-            color: #e50914;
-        }
-        .text-muted-light {
-            color: #999;
-        }
+        /* ── Custom Scrollbar ── */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #e50914; border-radius: 4px; }
 
-        /* ── navbar ── */
+        /* ── FIX: Missing class ── */
+        .text-muted-light { color: #999 !important; }
+
+        /* ── Colors & Utilities ── */
+        .text-accent { color: #e50914; }
+        .bg-accent { background-color: #e50914; }
+
+        /* ── Navbar ── */
         .navbar-custom {
-            background: rgba(11, 11, 11, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 0;
+            padding: 16px 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-custom.scrolled {
+            padding: 10px 0;
+            background: rgba(5, 5, 5, 0.95);
         }
         .navbar-custom .brand {
-            font-weight: 900;
-            font-size: 1.3rem;
-            letter-spacing: 2px;
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
             color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .navbar-custom .brand span {
+        .navbar-custom .brand i {
             color: #e50914;
+            font-size: 1.6rem;
         }
         .navbar-custom .nav-link {
             color: #888 !important;
-            font-weight: 600;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            padding: 6px 14px;
-            transition: color 0.25s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 18px !important;
+            transition: color 0.2s;
+            position: relative;
         }
         .navbar-custom .nav-link:hover,
         .navbar-custom .nav-link.active {
             color: #fff !important;
         }
+        .navbar-custom .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: #e50914;
+            border-radius: 50%;
+        }
         .btn-hire {
             background: #e50914;
             border: none;
             color: #fff !important;
-            font-weight: 700;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 8px 22px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 10px 24px;
             border-radius: 6px;
-            transition: background 0.25s, box-shadow 0.25s;
-            box-shadow: 0 2px 14px rgba(229, 9, 20, 0.35);
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
         }
         .btn-hire:hover {
-            background: #b20710;
-            box-shadow: 0 4px 24px rgba(229, 9, 20, 0.5);
-            color: #fff !important;
+            background: #ff0a1e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(229, 9, 20, 0.5);
+        }
+        .navbar-dark .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .navbar-dark .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
-        /* ── hero ── */
+        /* ── Hero Section ── */
         .hero {
-            min-height: 92vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            position: relative;
             text-align: center;
-            background: radial-gradient(ellipse at 30% 20%, #1a0507 0%, #0b0b0b 70%);
-            padding: 100px 0 60px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 120px 0 80px;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 50% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(50, 50, 50, 0.2) 0%, transparent 50%),
+                #050505;
+            z-index: -2;
+        }
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            z-index: -1;
+            pointer-events: none;
         }
         .hero h1 {
-            font-size: clamp(2.6rem, 6vw, 4.8rem);
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
             line-height: 1.1;
-            text-shadow: 0 4px 40px rgba(0, 0, 0, 0.8);
+            margin-bottom: 24px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .hero p {
-            max-width: 600px;
-            margin: 16px auto 38px;
+            max-width: 700px;
+            margin: 0 auto 40px;
             color: #aaa;
-            font-size: 1.05rem;
-            font-weight: 400;
+            font-size: 1.15rem;
+            font-weight: 300;
         }
         .btn-primary-custom {
             background: #e50914;
-            border: 1px solid #e50914;
+            border: none;
             color: #fff;
-            padding: 14px 34px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
+            padding: 16px 36px;
+            font-weight: 600;
+            font-size: 0.95rem;
             border-radius: 8px;
-            transition: 0.3s;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
-            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            box-shadow: 0 8px 24px rgba(229, 9, 20, 0.3);
+            font-family: 'Sora', sans-serif;
         }
         .btn-primary-custom:hover {
-            background: transparent;
-            color: #e50914;
-            box-shadow: 0 6px 28px rgba(229, 9, 20, 0.45);
+            background: #ff0a1e;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5);
         }
         .btn-outline-light-custom {
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
-            padding: 14px 34px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
+            padding: 16px 36px;
+            font-weight: 600;
+            font-size: 0.95rem;
             border-radius: 8px;
-            transition: 0.3s;
-            font-size: 0.85rem;
-            background: transparent;
-            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.03);
+            font-family: 'Sora', sans-serif;
         }
         .btn-outline-light-custom:hover {
-            background: #fff;
-            color: #0b0b0b;
-            border-color: #fff;
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.5);
+            color: #fff;
         }
+        .tech-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: #888;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 30px;
+        }
+        .tech-badge i { color: #e50914; margin-right: 8px; }
 
-        /* ── sections ── */
-        .section {
-            padding: 80px 0;
-        }
-        .section-dark {
+        /* ── Trust Bar ── */
+        .trust-bar {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 24px 0;
             background: #080808;
         }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #888;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .trust-item i { color: #e50914; font-size: 1.2rem; }
+
+        /* ── Sections ── */
+        .section { padding: 120px 0; }
+        .section-dark { background: #080808; }
         .section-title {
-            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+            font-size: clamp(2rem, 4vw, 3rem);
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         .section-sub {
             text-align: center;
             color: #888;
-            max-width: 580px;
-            margin: 0 auto 48px;
-            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            font-weight: 300;
         }
         .title-line {
-            width: 44px;
-            height: 3px;
+            width: 50px; height: 4px;
             background: #e50914;
-            margin: 0 auto 18px;
+            margin: 0 auto 20px;
             border-radius: 4px;
-            box-shadow: 0 0 16px rgba(229, 9, 20, 0.3);
         }
 
-        /* ── stats ── */
-        .stat-grid {
-            display: flex;
-            justify-content: center;
-            gap: 40px 60px;
-            flex-wrap: wrap;
-            margin-top: 28px;
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-number {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 2.8rem;
-            color: #fff;
-            line-height: 1;
-        }
-        .stat-number .accent {
-            color: #e50914;
-        }
-        .stat-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.8px;
-            color: #666;
-            font-weight: 600;
-            margin-top: 4px;
-        }
-
-        /* ── testimonial cards (from screenshot) ── */
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 28px 26px 22px;
-            transition: 0.25s;
+        /* ── Services / Feature Cards ── */
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            border-radius: 16px;
             height: 100%;
-            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            text-align: left;
         }
-        .testimonial-card:hover {
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.04);
             border-color: rgba(229, 9, 20, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
         }
-        .testimonial-card .project-name {
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
+        .feature-icon {
+            width: 50px; height: 50px;
+            background: rgba(229, 9, 20, 0.1);
+            color: #e50914;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .feature-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .feature-card p { color: #888; font-size: 0.95rem; margin: 0; }
+
+        /* ── Process / Expectations ── */
+        .process-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 28px 24px;
+            border-radius: 12px;
+            height: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .process-card:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(229, 9, 20, 0.25);
+        }
+        .process-card .number {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: #e50914;
+            opacity: 0.5;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .process-card h5 { color: #fff; font-size: 1rem; margin-bottom: 8px; }
+        .process-card p { color: #888; font-size: 0.9rem; margin: 0; }
+
+        /* ── Portfolio / Work Cards ── */
+        .portfolio-card {
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            height: 100%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .portfolio-card:hover {
+            border-color: rgba(229, 9, 20, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateY(-5px);
+        }
+        .portfolio-thumb {
+            position: relative;
+            height: 200px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .thumb-bg-1 { background: radial-gradient(circle at 50% 50%, #2a0507 0%, #000 100%); }
+        .thumb-bg-2 { background: radial-gradient(circle at 50% 50%, #052a1c 0%, #000 100%); }
+        .thumb-bg-3 { background: radial-gradient(circle at 50% 50%, #0a0a2a 0%, #000 100%); }
+
+        .play-icon {
+            width: 60px; height: 60px;
+            background: rgba(229, 9, 20, 0.9);
             color: #fff;
-            margin-bottom: 2px;
-            font-family: 'Montserrat', sans-serif;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            transition: all 0.3s;
+            z-index: 2;
+            pointer-events: none;
         }
-        .testimonial-card .project-meta {
-            font-size: 0.75rem;
-            color: #777;
-            letter-spacing: 0.3px;
-            margin-bottom: 10px;
+        .portfolio-card:hover .play-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 12px rgba(229, 9, 20, 0);
         }
-        .testimonial-card .stars {
-            color: #f5b342;
+        .portfolio-info { padding: 24px; }
+        .project-name {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .project-meta {
             font-size: 0.85rem;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            color: #666;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .testimonial-card .quote-text {
-            color: #ccc;
-            font-size: 0.92rem;
+        .stars { color: #f5b342; font-size: 0.9rem; margin-bottom: 12px; }
+        .quote-text {
+            color: #aaa;
+            font-size: 0.9rem;
             line-height: 1.6;
             font-style: italic;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
+            border-left: 2px solid rgba(229,9,20,0.5);
+            padding-left: 12px;
         }
-        .testimonial-card .badge-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 8px;
-            margin-bottom: 12px;
-        }
-        .testimonial-card .badge-group .badge {
-            background: rgba(255, 255, 255, 0.06);
-            color: #aaa;
-            font-weight: 500;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .testimonial-card .badge-group .badge.primary-badge {
-            background: rgba(229, 9, 20, 0.15);
-            color: #e50914;
-            border-color: rgba(229, 9, 20, 0.2);
-        }
-        .testimonial-card .price-tag {
-            font-size: 0.8rem;
+        .badge-group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+        .badge-custom {
+            background: rgba(255, 255, 255, 0.05);
             color: #888;
-            font-weight: 500;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .testimonial-card .price-tag strong {
-            color: #fff;
-            font-weight: 700;
+        .price-tag {
+            font-size: 0.85rem;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 12px;
         }
+        .price-tag strong { color: #fff; font-size: 1rem; font-weight: 700; }
 
-        /* ── contact ── */
-        .contact-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+        /* ── Testimonials ── */
+        .testimonial-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 32px;
             border-radius: 16px;
-            padding: 48px 36px;
-            text-align: center;
-            backdrop-filter: blur(6px);
+            height: 100%;
+            position: relative;
         }
-        .contact-box .big-icon {
-            font-size: 2.6rem;
+        .quote-mark {
+            position: absolute;
+            top: 20px; right: 24px;
+            font-size: 4rem;
+            font-family: serif;
+            color: rgba(255,255,255,0.05);
+            line-height: 1;
+        }
+        .client-info { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+        .client-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: #222;
+            display: flex; align-items: center; justify-content: center;
             color: #e50914;
-            margin-bottom: 12px;
-        }
-        .contact-box .email-link {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #fff;
-            transition: color 0.25s;
-        }
-        .contact-box .email-link:hover {
-            color: #e50914;
-        }
-        .contact-box .ig-link {
-            color: #aaa;
-            transition: color 0.25s;
-            font-weight: 500;
-        }
-        .contact-box .ig-link:hover {
-            color: #fff;
-        }
-        .btn-ig {
-            background: linear-gradient(135deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
-            border: none;
-            color: #fff !important;
             font-weight: 700;
-            padding: 12px 32px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            transition: opacity 0.25s, transform 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
         }
-        .btn-ig:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-            color: #fff !important;
+
+        /* ── Contact ── */
+        .contact-box {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
         }
-        .btn-email-outline {
+        .btn-email {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255,255,255,0.2);
             color: #fff;
-            font-weight: 700;
-            padding: 12px 32px;
+            padding: 14px 28px;
             border-radius: 8px;
-            font-size: 0.9rem;
-            transition: 0.25s;
-            display: inline-flex;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-email:hover { background: #fff; color: #000; }
+        .btn-ig {
+            background: linear-gradient(135deg, #405de6, #833ab4, #fd1d1d);
+            border: none;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-ig:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(131, 58, 180, 0.4); color: #fff; }
+
+        /* ── Back to Top ── */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: #e50914;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
+            transition: all 0.3s;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            cursor: pointer;
         }
-        .btn-email-outline:hover {
-            background: #fff;
-            color: #0b0b0b;
-            border-color: #fff;
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
-
-        /* ── footer ── */
-        .footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 32px 0 24px;
-            text-align: center;
-            background: #050505;
-        }
-        .footer .brand-small {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-        }
-        .footer .brand-small span {
-            color: #e50914;
-        }
-        .footer .copy {
-            color: #555;
-            font-size: 0.78rem;
-            margin-top: 4px;
+        .back-to-top:hover {
+            background: #ff0a1e;
+            transform: scale(1.05);
         }
 
-        /* ── responsive ── */
+        /* ── Footer ── */
+        .footer { background: #020202; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-brand { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.2rem; }
+
+        /* ── Video Modal ── */
+        .modal-content {
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+        }
+        .modal-content .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 16px 20px;
+        }
+        .modal-content .btn-close {
+            filter: invert(1);
+            opacity: 0.6;
+        }
+        .modal-content .btn-close:hover { opacity: 1; }
+
         @media (max-width: 768px) {
-            .hero {
-                min-height: auto;
-                padding: 110px 0 50px;
-            }
-            .section {
-                padding: 56px 0;
-            }
-            .stat-grid {
-                gap: 20px 30px;
-            }
-            .stat-number {
-                font-size: 2.2rem;
-            }
-            .contact-box {
-                padding: 32px 18px;
-            }
-            .testimonial-card {
-                padding: 22px 18px;
-            }
+            .section { padding: 80px 0; }
+            .hero { min-height: auto; padding: 140px 0 80px; }
+            .contact-box { padding: 36px 20px; }
+            .back-to-top { width: 42px; height: 42px; font-size: 1.2rem; bottom: 20px; right: 20px; }
         }
     </style>
 </head>
@@ -416,20 +516,24 @@
 <body>
 
     <!-- ═══ NAVBAR ═══ -->
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" id="mainNav">
         <div class="container">
-            <a class="brand" href="#">TRAILER<span>PROJECT</span></a>
+            <a class="brand" href="#home">
+                <i class="bi bi-collection-play-fill"></i>
+                TRAILER<span class="text-accent">PROJECT</span>
+            </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#work">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Testimonials</a></li>
                     <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a href="#contact" class="btn btn-hire">Hire Us</a>
+                        <a href="#contact" class="btn btn-hire">Message Me <i class="bi bi-arrow-right ms-1"></i></a>
                     </li>
                 </ul>
             </div>
@@ -438,151 +542,275 @@
 
     <!-- ═══ HERO ═══ -->
     <section class="hero" id="home">
-        <div class="container">
-            <h1>Turn Gameplay Into <br /><span class="text-accent">Cinematic Hype</span></h1>
-            <p>High-impact Steam trailers, teasers &amp; sound design that drive wishlists — trusted by indie devs worldwide.</p>
+        <div class="hero-bg"></div>
+        <div class="container" data-aos="fade-up" data-aos-duration="1000">
+            <div class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill mb-4 border border-danger border-opacity-25">
+                <i class="bi bi-star-fill me-1"></i> 5.0 Rated · Steam & Kickstarter Specialist
+            </div>
+            <h1>Most Games Fail in the <span class="text-accent">First 5 Seconds.</span></h1>
+            <p>Transform raw gameplay into high-converting, cinematic trailers engineered for Steam wishlists, Kickstarter funding, and massive sales. Your game deserves more than a screen recording set to music.</p>
             <div class="d-flex flex-wrap justify-content-center gap-3">
-                <a href="#work" class="btn btn-primary-custom"><i class="bi bi-play-circle-fill me-2"></i>See Showcase</a>
-                <a href="#contact" class="btn btn-outline-light-custom"><i class="bi bi-chat-dots-fill me-2"></i>Start a Project</a>
+                <a href="#work" class="btn btn-primary-custom"><i class="bi bi-play-circle-fill me-2"></i>Watch Showcase</a>
+                <a href="#contact" class="btn btn-outline-light-custom"><i class="bi bi-chat-dots-fill me-2"></i>Start Your Project</a>
             </div>
-            <!-- quick stats -->
-            <div class="stat-grid mt-5 pt-2">
-                <div class="stat-item">
-                    <div class="stat-number">150<span class="accent">+</span></div>
-                    <div class="stat-label">Trailers</div>
+            <div class="tech-badge">
+                <i class="bi bi-check-circle-fill"></i> Crafted exclusively in DaVinci Resolve Studio with cinematic color grading & precise sound design
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TRUST BAR ═══ -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="row text-center g-3">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="trust-item"><i class="bi bi-graph-up-arrow"></i> 150+ Trailers Delivered</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">98<span class="accent">%</span></div>
-                    <div class="stat-label">Satisfaction</div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="trust-item"><i class="bi bi-award-fill"></i> 98% Client Satisfaction</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">5<span class="accent">+</span></div>
-                    <div class="stat-label">Years</div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="trust-item"><i class="bi bi-lightning-charge-fill"></i> Response < 24 Hours</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ SERVICES (Tailored to your copy) ═══ -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="title-line" data-aos="fade-down"></div>
+            <h2 class="section-title" data-aos="fade-up">What <span class="text-accent">I Deliver</span></h2>
+            <p class="section-sub" data-aos="fade-up">From Steam page hooks to social media gold — every cut is built on psychology, rhythm, and raw impact.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-steam"></i></div>
+                        <h4>Steam-Compliant Gameplay Trailers</h4>
+                        <p>A cinematic, store-ready trailer optimized to meet Steam's guidelines and engineered for one purpose: maximizing that initial hook-rate.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+                        <h4>Teaser Trailers & Kickstarter Promos</h4>
+                        <p>High-tension pacing and elite audio-visual synchronization designed to build massive pre-launch hype and crush your funding goals. You'll feel the energy the moment the first beat drops.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-phone"></i></div>
+                        <h4>Vertical Social Media Ads</h4>
+                        <p>Engaging short-form cuts tailored for TikTok, Shorts, and Reels, built to stop thumbs and send organic traffic directly to your Steam page.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="350">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-arrow-repeat"></i></div>
+                        <h4>Launch & Update Promos</h4>
+                        <p>Dynamic milestone edits designed to re-energize your existing community and bring lapsed wishlisters back into the fold.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ WORK / TESTIMONIALS FROM SCREENSHOT ═══ -->
-    <section class="section section-dark" id="work">
+    <!-- ═══ PROCESS / EXPECTATIONS (New Section) ═══ -->
+    <section class="section section-dark" id="process">
         <div class="container">
-            <div class="title-line"></div>
-            <h2 class="section-title">Recent <span class="text-accent">Projects</span></h2>
-            <p class="section-sub">Real client work — direct from our portfolio.</p>
+            <div class="title-line" data-aos="fade-down"></div>
+            <h2 class="section-title" data-aos="fade-up">What You Can <span class="text-accent">Expect</span></h2>
+            <p class="section-sub" data-aos="fade-up">A structured, stress-free workflow backed by a verified 5.0-star rating.</p>
 
             <div class="row g-4">
-
-                <!-- 1. Cinematic Trailer for Steam (Jun 24 – Jul 2, 2026) -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <div class="project-name">Cinematic Trailer for Steam</div>
-                        <div class="project-meta"><i class="bi bi-calendar3 me-1"></i>Jun 24 – Jul 2, 2026</div>
-                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> 5.0</div>
-                        <div class="quote-text">“Talented person with great communication. A great experience to work with him.”</div>
-                        <div class="badge-group">
-                            <span class="badge primary-badge">Clear Communicator</span>
-                            <span class="badge primary-badge">Detail Oriented</span>
-                            <span class="badge">Game Trailer</span>
-                            <span class="badge">Cinematic Video</span>
-                        </div>
-                        <div class="price-tag"><strong>$350.00</strong> · Fixed Price</div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="process-card">
+                        <div class="number">01</div>
+                        <h5>Clear Communication</h5>
+                        <p>No ghosting, ever. You'll always know where your project stands.</p>
                     </div>
                 </div>
-
-                <!-- 2. Cinematic Trailer for Steam (Jun 20 – Jun 24, 2026) -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <div class="project-name">Cinematic Trailer for Steam</div>
-                        <div class="project-meta"><i class="bi bi-calendar3 me-1"></i>Jun 20 – Jun 24, 2026</div>
-                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> 5.0</div>
-                        <div class="quote-text">“Excellent working with Haeril, will absolutely work with him again in the future!”</div>
-                        <div class="badge-group">
-                            <span class="badge primary-badge">Game Trailer</span>
-                            <span class="badge primary-badge">Committed to Quality</span>
-                            <span class="badge primary-badge">Clear Communicator</span>
-                            <span class="badge primary-badge">Detail Oriented</span>
-                            <span class="badge">Movie Trailer</span>
-                        </div>
-                        <div class="price-tag"><strong>$500.00</strong> · Fixed Price</div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="process-card">
+                        <div class="number">02</div>
+                        <h5>Structured Workflow</h5>
+                        <p>Seamless guidance from raw footage selection and storyboarding to final master export.</p>
                     </div>
                 </div>
-
-                <!-- 3. Video Editor Needed for Travel and Sentimental Storytelling (Sep 9 – Nov 21, 2025) -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <div class="project-name">Video Editor — Travel &amp; Sentimental</div>
-                        <div class="project-meta"><i class="bi bi-calendar3 me-1"></i>Sep 9 – Nov 21, 2025</div>
-                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> 5.0</div>
-                        <div class="quote-text">“Worked super quickly and took direction well!”</div>
-                        <div class="badge-group">
-                            <span class="badge primary-badge">Reliable</span>
-                            <span class="badge primary-badge">Collaborative</span>
-                            <span class="badge primary-badge">Clear Communicator</span>
-                            <span class="badge primary-badge">Detail Oriented</span>
-                            <span class="badge primary-badge">Accountable for Outcomes</span>
-                        </div>
-                        <div class="price-tag"><strong>—</strong> · Fixed Price</div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="process-card">
+                        <div class="number">03</div>
+                        <h5>On-Time Delivery</h5>
+                        <p>Your marketing timeline is sacred. Deadlines are respected, period.</p>
                     </div>
                 </div>
-
-            </div><!-- /row -->
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="process-card">
+                        <div class="number">04</div>
+                        <h5>Collaborative Revisions</h5>
+                        <p>A streamlined feedback process to refine every frame until it perfectly aligns with your vision.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ═══ REVIEWS (additional social proof) ═══ -->
-    <section class="section" id="reviews">
+    <!-- ═══ WORK / PORTFOLIO ═══ -->
+    <section class="section" id="work">
         <div class="container">
-            <div class="title-line"></div>
-            <h2 class="section-title">More <span class="text-accent">Testimonials</span></h2>
-            <p class="section-sub">What clients say about working with Trailer Project.</p>
+            <div class="title-line" data-aos="fade-down"></div>
+            <h2 class="section-title" data-aos="fade-up">Recent <span class="text-accent">Projects</span></h2>
+            <p class="section-sub" data-aos="fade-up">Real client work from the portfolio — delivering results, not just edits.</p>
 
             <div class="row g-4">
-
-                <div class="col-md-6">
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                        <div class="quote-text">“Haeril understood the emotional core of our game instantly. The trailer felt like a short film — our community was blown away.”</div>
-                        <div style="color:#999; font-size:0.85rem; font-weight:500;">— Sarah Chen, Creative Director</div>
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/dTlFHu63JxU">
+                        <div class="portfolio-thumb thumb-bg-1">
+                            <div class="play-icon"><i class="bi bi-play-fill"></i></div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="project-name">Cinematic Trailer for Steam</div>
+                            <div class="project-meta"><i class="bi bi-calendar3"></i> Jun 24 – Jul 2, 2026</div>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                <span class="ms-1 text-muted-light">5.0</span>
+                            </div>
+                            <div class="quote-text">“Talented person with great communication. A great experience to work with him.”</div>
+                            <div class="badge-group">
+                                <span class="badge-custom">Clear Communicator</span>
+                                <span class="badge-custom">Detail Oriented</span>
+                                <span class="badge-custom">Game Trailer</span>
+                            </div>
+                            <div class="price-tag"><strong>$350.00</strong> · Fixed Price</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                        <div class="quote-text">“Fast turnaround, professional edits, and the sound design gave me chills. Trailer Project knows exactly how to sell a game.”</div>
-                        <div style="color:#999; font-size:0.85rem; font-weight:500;">— Brian Torres, Publisher</div>
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/6l3gMs3uK0E">
+                        <div class="portfolio-thumb thumb-bg-2">
+                            <div class="play-icon"><i class="bi bi-play-fill"></i></div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="project-name">Cinematic Trailer for Steam</div>
+                            <div class="project-meta"><i class="bi bi-calendar3"></i> Jun 20 – Jun 24, 2026</div>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                <span class="ms-1 text-muted-light">5.0</span>
+                            </div>
+                            <div class="quote-text">“Excellent working with Haeril, will absolutely work with him again in the future!”</div>
+                            <div class="badge-group">
+                                <span class="badge-custom">Committed to Quality</span>
+                                <span class="badge-custom">Movie Trailer</span>
+                                <span class="badge-custom">Game Trailer</span>
+                            </div>
+                            <div class="price-tag"><strong>$500.00</strong> · Fixed Price</div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-card" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/aeu8WyRaAa0">
+                        <div class="portfolio-thumb thumb-bg-3">
+                            <div class="play-icon"><i class="bi bi-play-fill"></i></div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="project-name">Video Editor — Travel &amp; Sentimental</div>
+                            <div class="project-meta"><i class="bi bi-calendar3"></i> Sep 9 – Nov 21, 2025</div>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                <span class="ms-1 text-muted-light">5.0</span>
+                            </div>
+                            <div class="quote-text">“Worked super quickly and took direction well. Highly reliable for storytelling.”</div>
+                            <div class="badge-group">
+                                <span class="badge-custom">Reliable</span>
+                                <span class="badge-custom">Collaborative</span>
+                                <span class="badge-custom">Accountable</span>
+                            </div>
+                            <div class="price-tag"><strong>—</strong> · Fixed Price</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ REVIEWS ═══ -->
+    <section class="section section-dark" id="reviews">
+        <div class="container">
+            <div class="title-line" data-aos="fade-down"></div>
+            <h2 class="section-title" data-aos="fade-up">What <span class="text-accent">Clients Say</span></h2>
+            <p class="section-sub" data-aos="fade-up">Trusted by creative directors, indie studios, and publishers worldwide.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="testimonial-box">
+                        <div class="quote-mark">”</div>
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="quote-text border-0 p-0">“Haeril understood the emotional core of our game instantly. The trailer felt like a short film — our community was blown away. Conversion rates went up significantly.”</p>
+                        <div class="client-info">
+                            <div class="client-avatar">SC</div>
+                            <div>
+                                <div style="color:#fff; font-weight:600; font-size:0.9rem;">Sarah Chen</div>
+                                <div style="color:#666; font-size:0.8rem;">Creative Director</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="testimonial-box">
+                        <div class="quote-mark">”</div>
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="quote-text border-0 p-0">“Fast turnaround, professional edits, and the sound design gave me chills. Trailer Project knows exactly how to sell a game in 60 seconds.”</p>
+                        <div class="client-info">
+                            <div class="client-avatar">BT</div>
+                            <div>
+                                <div style="color:#fff; font-weight:600; font-size:0.9rem;">Brian Torres</div>
+                                <div style="color:#666; font-size:0.8rem;">Indie Game Publisher</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ═══ CONTACT ═══ -->
-    <section class="section section-dark" id="contact">
+    <section class="section" id="contact">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-9" data-aos="zoom-in">
                     <div class="contact-box">
-                        <div class="big-icon"><i class="bi bi-send-fill"></i></div>
-                        <h3 style="font-size: clamp(1.6rem, 2.8vw, 2.4rem);">Let's Build <span class="text-accent">Hype</span></h3>
-                        <p style="color:#999; max-width:460px; margin: 6px auto 28px;">
-                            Ready to turn your gameplay into a cinematic experience? Reach out — we reply within 24 hours.
+                        <div class="text-accent mb-3" style="font-size: 2.5rem;">
+                            <i class="bi bi-send-fill"></i>
+                        </div>
+                        <h3 style="font-size: clamp(1.8rem, 4vw, 2.8rem);">Ready to Turn <span class="text-accent">Viewers into Players?</span></h3>
+                        <p style="color:#888; max-width:480px; margin: 10px auto 32px; font-size: 1.1rem;">
+                            Send over a clip of your project. Let's discuss how to build a trailer that plays as well as your game does.
                         </p>
 
                         <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
-                            <a href="mailto:owntrailerproject@gmail.com" class="btn-email-outline">
+                            <a href="mailto:owntrailerproject@gmail.com" class="btn-email">
                                 <i class="bi bi-envelope-fill"></i> owntrailerproject@gmail.com
                             </a>
                             <a href="https://www.instagram.com/trailerproject_haeril/" target="_blank" rel="noopener" class="btn-ig">
-                                <i class="bi bi-instagram"></i> @trailerproject_haeril
+                                <i class="bi bi-instagram"></i> Message on Instagram
                             </a>
                         </div>
 
-                        <hr style="border-color: rgba(255,255,255,0.06); margin: 20px 0;" />
-                        <div style="font-size:0.85rem; color:#666;">
-                            <i class="bi bi-clock me-1"></i> Response within 24h &nbsp;·&nbsp;
-                            <i class="bi bi-check-circle-fill text-accent me-1"></i> 98% client satisfaction
+                        <hr style="border-color: rgba(255,255,255,0.06); margin: 30px 0 20px;">
+                        <div style="font-size:0.85rem; color:#555; letter-spacing: 1px; text-transform: uppercase;">
+                            <i class="bi bi-shield-check text-accent me-1"></i> 100% Confidential &nbsp;·&nbsp;
+                            <i class="bi bi-clock text-accent me-1"></i> Response < 24 Hours
                         </div>
                     </div>
                 </div>
@@ -593,52 +821,127 @@
     <!-- ═══ FOOTER ═══ -->
     <footer class="footer">
         <div class="container">
-            <div class="brand-small">TRAILER<span>PROJECT</span></div>
-            <div style="color:#666; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">
-                Cinematic Game Trailers — Since 2020
-            </div>
-            <div style="display:flex; justify-content:center; gap:14px; margin-bottom:10px;">
-                <a href="https://www.instagram.com/trailerproject_haeril/" target="_blank" rel="noopener" style="color:#777; transition:color 0.25s; font-size:1.2rem;"><i class="bi bi-instagram"></i></a>
-                <a href="mailto:owntrailerproject@gmail.com" style="color:#777; transition:color 0.25s; font-size:1.2rem;"><i class="bi bi-envelope-fill"></i></a>
-            </div>
-            <div class="copy">
-                &copy; 2026 Trailer Project Studio &middot; <a href="#home" style="color:#555; transition:color 0.25s;">Back to Top <i class="bi bi-arrow-up-short"></i></a>
+            <div class="d-flex flex-column align-items-center gap-3">
+                <div class="footer-brand">TRAILER<span class="text-accent">PROJECT</span></div>
+                <div style="color:#555; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase;">
+                    Cinematic Game Trailers — Since 2020
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="https://www.instagram.com/trailerproject_haeril/" target="_blank" rel="noopener" style="color:#666; transition:color 0.2s; font-size:1.4rem;"><i class="bi bi-instagram"></i></a>
+                    <a href="mailto:owntrailerproject@gmail.com" style="color:#666; transition:color 0.2s; font-size:1.4rem;"><i class="bi bi-envelope-fill"></i></a>
+                </div>
+                <div style="color:#444; font-size:0.75rem; margin-top:10px;">
+                    &copy; 2026 Trailer Project Studio. All rights reserved.
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- ═══ Bootstrap JS ═══ -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <!-- ═══ VIDEO MODAL ═══ -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title text-white m-0"><i class="bi bi-film text-accent me-2"></i>Trailer Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="videoIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- ═══ Smooth scroll & nav active ═══ -->
+    <!-- ═══ BACK TO TOP ═══ -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- ═══ SCRIPTS ═══ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+
+        // Navbar shrink
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll & nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // close mobile nav
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
                     const nav = document.getElementById('navMenu');
-                    if (nav.classList.contains('show')) nav.classList.remove('show');
+                    if (nav.classList.contains('show')) {
+                        new bootstrap.Collapse(nav).hide();
+                    }
                 }
             });
         });
 
-        // active nav link on scroll
+        // Active nav link
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
+        const navLinks = document.querySelectorAll('.navbar-custom .nav-link');
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
-                const top = section.offsetTop - 100;
-                if (window.scrollY >= top) current = section.id;
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
             });
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
             });
+        });
+
+        // Video modal
+        const videoModal = document.getElementById('videoModal');
+        const videoIframe = document.getElementById('videoIframe');
+        videoModal.addEventListener('show.bs.modal', function(event) {
+            const trigger = event.relatedTarget;
+            const videoUrl = trigger.getAttribute('data-video');
+            if (videoUrl) {
+                videoIframe.src = videoUrl + '?autoplay=1&rel=0';
+            }
+        });
+        videoModal.addEventListener('hide.bs.modal', function() {
+            videoIframe.src = '';
+        });
+
+        // Back to Top
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backBtn.classList.add('show');
+            } else {
+                backBtn.classList.remove('show');
+            }
+        });
+        backBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 
