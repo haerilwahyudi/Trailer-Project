@@ -25,13 +25,7 @@
             --text-muted: #a0a0a0;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--dark-bg); }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
-
         body { font-family: 'Inter', sans-serif; background-color: var(--dark-bg); color: var(--text-light); overflow-x: hidden; }
-
         h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; }
 
         .navbar { background-color: rgba(3, 3, 3, 0.85) !important; backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); }
@@ -63,11 +57,9 @@
         .service-card:hover { transform: translateY(-10px); border-color: rgba(229, 9, 20, 0.3); background: #0d0d0d; }
         .service-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 25px; }
 
-        .video-container { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #000; }
-        .portfolio-title { font-size: 1rem; letter-spacing: 1px; color: #eee; text-transform: uppercase; font-weight: 700; }
-
-        .testimonial-card { background: var(--glass-bg); padding: 35px; border-radius: 12px; border: 1px solid var(--border-color); height: 100%; position: relative; }
-        .quote-icon { position: absolute; top: 20px; right: 25px; font-size: 3rem; color: rgba(255,255,255,0.03); }
+        .video-container { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #000; transition: 0.3s; }
+        .video-container:hover { border-color: var(--primary-color); transform: scale(1.02); }
+        .portfolio-title { font-size: 0.9rem; letter-spacing: 1px; color: #bbb; text-transform: uppercase; font-weight: 700; margin-top: 15px; }
 
         footer { background-color: #000; padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color); }
         .social-icons a { width: 45px; height: 45px; border-radius: 50%; background: #111; color: #fff; margin: 0 10px; transition: 0.3s; border: 1px solid #222; }
@@ -121,16 +113,12 @@
     </div>
 
     <section id="about" class="section-padding">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-10 text-center" data-aos="fade-up">
-                    <div class="title-line"></div>
-                    <h2 class="mb-4">Storytelling Through <span>Cuts & Beats</span></h2>
-                    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px;">
-                        We believe a game trailer isn't just a compilation of gameplay—it's the first promise you make to your players. As a specialized game trailer studio, we combine tight editing algorithms, thunderous sound design, and powerful 3-second hooks to ensure your game stands out in a crowded market.
-                    </p>
-                </div>
-            </div>
+        <div class="container text-center">
+            <div class="title-line"></div>
+            <h2 class="mb-4">Storytelling Through <span>Cuts & Beats</span></h2>
+            <p style="color: var(--text-muted); max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+                We believe a game trailer isn't just a compilation of gameplay—it's the first promise you make to your players. We specialize in high-impact editing that drives conversions.
+            </p>
         </div>
     </section>
 
@@ -150,9 +138,11 @@
         <div class="container">
             <div class="title-line"></div>
             <h2 class="section-title">Selected <span>Works</span></h2>
-            <div class="row">
-                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9 mb-3"><iframe src="https://www.youtube.com/embed/dTlFHu63JxU" allowfullscreen></iframe></div></div>
-                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9 mb-3"><iframe src="https://www.youtube.com/embed/6l3gMs3uK0E" allowfullscreen></iframe></div></div>
+            <div class="row text-center">
+                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/dTlFHu63JxU" allowfullscreen></iframe></div><p class="portfolio-title">Timeline Showcase</p></div>
+                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/6l3gMs3uK0E" allowfullscreen></iframe></div><p class="portfolio-title">Storyboard Concept</p></div>
+                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/aeu8WyRaAa0" allowfullscreen></iframe></div><p class="portfolio-title">Misfortune Trailer</p></div>
+                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/DYO77IxYvoI" allowfullscreen></iframe></div><p class="portfolio-title">Cinematic Edit</p></div>
             </div>
         </div>
     </section>
@@ -164,7 +154,6 @@
                     <h2 class="mb-3" style="font-size: 3rem;">Ready To Build <span>Hype?</span></h2>
                     <p class="mb-5" style="color: var(--text-muted); font-size: 1.2rem;">Drop us a message. Let's discuss your game's vision and create a trailer that converts viewers into players.</p>
                     <a href="https://instagram.com/trailerproject_haeril" target="_blank" class="btn btn-custom me-3 mb-3"><i class="bi bi-instagram me-2"></i>DM on Instagram</a>
-                    <!-- EMAIL UPDATED DI BAWAH -->
                     <a href="mailto:owntrailerproject@gmail.com" class="btn btn-outline-custom mb-3"><i class="bi bi-envelope me-2"></i>Email Studio</a>
                 </div>
             </div>
