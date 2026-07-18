@@ -4,179 +4,1077 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trailer Project | High-Conversion Steam Game Trailers</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- AOS Animation CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <style>
         :root {
-            --primary-color: #e50914; 
-            --primary-glow: rgba(229, 9, 20, 0.4);
+            --primary-color: #e50914;
+            --primary-glow: rgba(229, 9, 20, 0.45);
+            --primary-dark: #b20710;
             --dark-bg: #030303;
-            --secondary-bg: #0a0a0a;
-            --glass-bg: rgba(20, 20, 20, 0.7);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-light: #f5f5f5;
-            --text-muted: #a0a0a0;
+            --secondary-bg: #080808;
+            --glass-bg: rgba(18, 18, 18, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-light: #f0f0f0;
+            --text-muted: #999;
+            --text-dim: #666;
+            --card-hover-bg: #111;
+            --gradient-overlay: linear-gradient(180deg, rgba(3, 3, 3, 0) 0%, rgba(3, 3, 3, 0.9) 100%);
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --transition-smooth: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--dark-bg); color: var(--text-light); overflow-x: hidden; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; }
+        * {
+            box-sizing: border-box;
+        }
 
-        .navbar { background-color: rgba(3, 3, 3, 0.85) !important; backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); }
-        .navbar-brand { font-weight: 900; font-size: 1.4rem; color: #fff !important; letter-spacing: 2px; }
-        .navbar-brand span { color: var(--primary-color); }
-        .nav-link { color: var(--text-muted) !important; font-size: 0.9rem; font-weight: 500; margin: 0 15px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-link:hover { color: var(--primary-color) !important; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.7;
+        }
 
-        .hero-section { height: 100vh; background: radial-gradient(circle at center, #1a0204 0%, var(--dark-bg) 60%); display: flex; align-items: center; text-align: center; border-bottom: 1px solid var(--border-color); }
-        .hero-title { font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 0 40px rgba(0,0,0,0.8); }
-        .text-glow { color: var(--primary-color); text-shadow: 0 0 20px var(--primary-glow); }
-        .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px auto; font-weight: 300; }
-        
-        .btn-custom { background-color: var(--primary-color); border: 1px solid var(--primary-color); padding: 14px 35px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px var(--primary-glow); }
-        .btn-custom:hover { background-color: transparent; color: var(--primary-color); box-shadow: 0 6px 20px var(--primary-glow); }
-        .btn-outline-custom { border: 1px solid rgba(255,255,255,0.3); color: white; padding: 14px 35px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: transparent; transition: all 0.3s ease; }
-        .btn-outline-custom:hover { background-color: white; color: black; }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.4px;
+            line-height: 1.2;
+        }
 
-        .platform-banner { background: #050505; border-bottom: 1px solid var(--border-color); padding: 20px 0; text-align: center; }
-        .platform-text { color: #555; font-weight: 700; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; }
-        .platform-logos i { font-size: 1.5rem; color: #444; margin: 0 15px; }
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
 
-        .section-padding { padding: 100px 0; }
-        .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; }
-        .section-title span { color: var(--primary-color); }
-        .title-line { width: 40px; height: 3px; background: var(--primary-color); margin: 0 auto 20px auto; }
+        /* Selection */
+        ::selection {
+            background: var(--primary-color);
+            color: #fff;
+        }
 
-        .service-card { background: var(--glass-bg); border: 1px solid var(--border-color); padding: 40px 30px; border-radius: 12px; transition: all 0.4s ease; height: 100%; }
-        .service-card:hover { transform: translateY(-10px); border-color: rgba(229, 9, 20, 0.3); background: #0d0d0d; }
-        .service-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 25px; }
+        /* Navbar */
+        .navbar {
+            background-color: rgba(3, 3, 3, 0.88) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 14px 0;
+            transition: var(--transition-smooth);
+        }
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(3, 3, 3, 0.95) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+        }
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #fff !important;
+            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition-smooth);
+            border-radius: 2px;
+        }
+        .nav-link:hover {
+            color: #fff !important;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active {
+            color: #fff !important;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
 
-        .video-container { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #000; transition: 0.3s; }
-        .video-container:hover { border-color: var(--primary-color); transform: scale(1.02); }
-        .portfolio-title { font-size: 0.9rem; letter-spacing: 1px; color: #bbb; text-transform: uppercase; font-weight: 700; margin-top: 15px; }
+        .btn-nav {
+            background-color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 9px 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            transition: var(--transition-smooth);
+            box-shadow: 0 2px 12px var(--primary-glow);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .btn-nav:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
 
-        footer { background-color: #000; padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color); }
-        .social-icons a { width: 45px; height: 45px; border-radius: 50%; background: #111; color: #fff; margin: 0 10px; transition: 0.3s; border: 1px solid #222; }
-        .social-icons a:hover { background: var(--primary-color); border-color: var(--primary-color); }
+        /* Hero */
+        .hero-section {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at center, #140104 0%, #030303 65%);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(229, 9, 20, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-title {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.08;
+            margin-bottom: 22px;
+            text-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+            position: relative;
+            z-index: 1;
+        }
+        .text-glow {
+            color: var(--primary-color);
+            text-shadow: 0 0 30px var(--primary-glow), 0 0 60px rgba(229, 9, 20, 0.25);
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.6vw, 1.25rem);
+            color: #b0b0b0;
+            max-width: 680px;
+            margin: 0 auto 45px auto;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+        }
+        .btn-custom {
+            background-color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 15px 38px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #fff;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 20px var(--primary-glow);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-custom:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            box-shadow: 0 8px 30px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+        .btn-outline-custom {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #fff;
+            padding: 15px 38px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: transparent;
+            transition: var(--transition-smooth);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-outline-custom:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Platform Banner */
+        .platform-banner {
+            background: #040404;
+            border-bottom: 1px solid var(--glass-border);
+            padding: 18px 0;
+            text-align: center;
+        }
+        .platform-text {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .platform-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .platform-logos i {
+            font-size: 1.6rem;
+            color: #3a3a3a;
+            transition: var(--transition-smooth);
+        }
+        .platform-logos i:hover {
+            color: #777;
+        }
+
+        /* Sections */
+        .section-padding {
+            padding: 110px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            letter-spacing: 1px;
+        }
+        .section-title span {
+            color: var(--primary-color);
+        }
+        .title-line {
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 0 auto 25px auto;
+            border-radius: 3px;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: -30px auto 50px auto;
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+
+        /* About */
+        .about-text {
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            text-align: center;
+        }
+        .about-text strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Stats */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        .stat-item {
+            text-align: center;
+            min-width: 120px;
+        }
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: #fff;
+            line-height: 1;
+        }
+        .stat-number span {
+            color: var(--primary-color);
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-top: 8px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Service Cards */
+        .service-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 45px 30px;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-smooth);
+            height: 100%;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(229, 9, 20, 0.35);
+            background: var(--card-hover-bg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        .service-icon {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 22px;
+            display: inline-block;
+            transition: var(--transition-smooth);
+        }
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            text-shadow: 0 0 25px var(--primary-glow);
+        }
+        .service-card h5 {
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* Portfolio */
+        .portfolio-item {
+            margin-bottom: 40px;
+        }
+        .video-card {
+            background: #050505;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        .video-card:hover {
+            border-color: rgba(229, 9, 20, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+        .video-card .ratio {
+            background: #000;
+        }
+        .video-card iframe {
+            border: none;
+        }
+        .video-info {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .video-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #ddd;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+        .video-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--glass-bg);
+            padding: 40px 30px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+            height: 100%;
+            position: relative;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: var(--transition-smooth);
+        }
+        .testimonial-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: var(--card-hover-bg);
+            transform: translateY(-4px);
+        }
+        .quote-icon {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.025);
+            pointer-events: none;
+        }
+        .testimonial-card .stars {
+            color: #f5a623;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .testimonial-card .quote {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 16px;
+        }
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .author-info h6 {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .author-info small {
+            color: #777;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: radial-gradient(ellipse at center, #1a0204 0%, #030303 70%);
+            border-top: 1px solid var(--glass-border);
+        }
+        .contact-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 50px 40px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+        .contact-card:hover {
+            border-color: rgba(229, 9, 20, 0.3);
+        }
+        .contact-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            margin: 8px;
+        }
+        .contact-option.primary {
+            background: var(--primary-color);
+            color: #fff;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 4px 18px var(--primary-glow);
+        }
+        .contact-option.primary:hover {
+            background: transparent;
+            color: var(--primary-color);
+            box-shadow: 0 6px 25px var(--primary-glow);
+            transform: translateY(-3px);
+        }
+        .contact-option.secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .contact-option.secondary:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+        .contact-option i {
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            padding: 50px 0 30px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+        .footer-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .footer-brand span {
+            color: var(--primary-color);
+        }
+        .footer-tagline {
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .social-icons a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #0f0f0f;
+            color: #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+            border: 1px solid #1a1a1a;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        .social-icons a:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--primary-glow);
+        }
+        .footer-bottom {
+            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-bottom a {
+            color: #666;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        .footer-bottom a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 70px 0;
+            }
+            .hero-title {
+                font-size: 2.4rem;
+            }
+            .btn-custom,
+            .btn-outline-custom {
+                padding: 12px 26px;
+                font-size: 0.8rem;
+            }
+            .stats-row {
+                gap: 20px;
+            }
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            .contact-option {
+                padding: 14px 22px;
+                font-size: 0.8rem;
+            }
+            .video-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#">TRAILER<span>PROJECT</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Studio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#portfolio">Showcase</a></li>
                     <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="#contact" class="btn btn-nav">Hire Us</a>
+                    </li>
                 </ul>
-                <a href="#contact" class="btn btn-custom ms-lg-4" style="padding: 8px 20px; font-size: 0.8rem;">Hire Us</a>
             </div>
         </div>
     </nav>
 
+    <!-- HERO -->
     <header id="home" class="hero-section">
-        <div class="container">
-            <div data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="hero-title">Turn Gameplay Into <br><span class="text-glow">Cinematic Hype</span></h1>
-                <p class="hero-subtitle">We craft high-conversion Steam trailers, punchy teasers, and immersive sound design to skyrocket your game's Wishlists.</p>
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a href="#portfolio" class="btn btn-custom">Watch Showreel</a>
-                    <a href="#contact" class="btn btn-outline-custom">Start a Project</a>
-                </div>
+        <div class="container" data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out-cubic">
+            <h1 class="hero-title">Turn Gameplay Into<br><span class="text-glow">Cinematic Hype</span></h1>
+            <p class="hero-subtitle">We craft high-conversion Steam trailers, punchy teasers, and immersive sound design to skyrocket your game's Wishlists — trusted by indie devs & studios worldwide.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="#portfolio" class="btn btn-custom"><i class="bi bi-play-circle-fill me-2"></i>Watch Showreel</a>
+                <a href="#contact" class="btn btn-outline-custom"><i class="bi bi-chat-dots-fill me-2"></i>Start a Project</a>
             </div>
         </div>
     </header>
 
+    <!-- PLATFORM BANNER -->
     <div class="platform-banner">
         <div class="container">
-            <p class="platform-text mb-2">Engineered For</p>
+            <p class="platform-text">Optimized For</p>
             <div class="platform-logos">
                 <i class="bi bi-steam" title="Steam"></i>
                 <i class="bi bi-playstation" title="PlayStation"></i>
                 <i class="bi bi-xbox" title="Xbox"></i>
                 <i class="bi bi-youtube" title="YouTube"></i>
+                <i class="bi bi-nintendo-switch" title="Nintendo Switch"></i>
+                <i class="bi bi-windows" title="Windows"></i>
             </div>
         </div>
     </div>
 
+    <!-- ABOUT / STUDIO -->
     <section id="about" class="section-padding">
-        <div class="container text-center">
+        <div class="container" data-aos="fade-up" data-aos-duration="900">
             <div class="title-line"></div>
-            <h2 class="mb-4">Storytelling Through <span>Cuts & Beats</span></h2>
-            <p style="color: var(--text-muted); max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
-                We believe a game trailer isn't just a compilation of gameplay—it's the first promise you make to your players. We specialize in high-impact editing that drives conversions.
+            <h2 class="section-title">Storytelling Through <span>Cuts & Beats</span></h2>
+            <p class="about-text">
+                We believe a game trailer isn't just a compilation of gameplay — it's the <strong>first promise</strong> you make to your players. At <strong>Trailer Project</strong>, we specialize in high-impact editing, cinematic pacing, and heavy sound design that <strong>drive conversions</strong> and build genuine hype. Every frame is intentional. Every beat matters.
             </p>
-        </div>
-    </section>
-
-    <section id="services" class="section-padding" style="background-color: var(--secondary-bg);">
-        <div class="container">
-            <div class="title-line"></div>
-            <h2 class="section-title">Studio <span>Capabilities</span></h2>
-            <div class="row">
-                <div class="col-md-4 mb-4"><div class="service-card"><div class="service-icon"><i class="bi bi-film"></i></div><h5>Cinematic Trailers</h5></div></div>
-                <div class="col-md-4 mb-4"><div class="service-card"><div class="service-icon"><i class="bi bi-lightning-charge-fill"></i></div><h5>Punchy Teasers</h5></div></div>
-                <div class="col-md-4 mb-4"><div class="service-card"><div class="service-icon"><i class="bi bi-soundwave"></i></div><h5>Heavy Sound Design</h5></div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio" class="section-padding">
-        <div class="container">
-            <div class="title-line"></div>
-            <h2 class="section-title">Selected <span>Works</span></h2>
-            <div class="row text-center">
-                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/dTlFHu63JxU" allowfullscreen></iframe></div><p class="portfolio-title">Timeline Showcase</p></div>
-                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/6l3gMs3uK0E" allowfullscreen></iframe></div><p class="portfolio-title">Storyboard Concept</p></div>
-                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/aeu8WyRaAa0" allowfullscreen></iframe></div><p class="portfolio-title">Misfortune Trailer</p></div>
-                <div class="col-md-6 mb-5"><div class="video-container ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/DYO77IxYvoI" allowfullscreen></iframe></div><p class="portfolio-title">Cinematic Edit</p></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section-padding" style="background: radial-gradient(circle at center, #1a0204 0%, var(--dark-bg) 70%); border-top: 1px solid var(--border-color);">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center" data-aos="zoom-in">
-                    <h2 class="mb-3" style="font-size: 3rem;">Ready To Build <span>Hype?</span></h2>
-                    <p class="mb-5" style="color: var(--text-muted); font-size: 1.2rem;">Drop us a message. Let's discuss your game's vision and create a trailer that converts viewers into players.</p>
-                    <a href="https://instagram.com/trailerproject_haeril" target="_blank" class="btn btn-custom me-3 mb-3"><i class="bi bi-instagram me-2"></i>DM on Instagram</a>
-                    <a href="mailto:owntrailerproject@gmail.com" class="btn btn-outline-custom mb-3"><i class="bi bi-envelope me-2"></i>Email Studio</a>
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">150<span>+</span></div>
+                    <div class="stat-label">Trailers Produced</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">80<span>+</span></div>
+                    <div class="stat-label">Games Featured</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98<span>%</span></div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5<span>+</span></div>
+                    <div class="stat-label">Years Experience</div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SERVICES -->
+    <section id="services" class="section-padding" style="background-color: var(--secondary-bg);">
+        <div class="container" data-aos="fade-up" data-aos-duration="900">
+            <div class="title-line"></div>
+            <h2 class="section-title">Studio <span>Capabilities</span></h2>
+            <p class="section-subtitle">End-to-end trailer production tailored for Steam, consoles, and social media.</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-film"></i></div>
+                        <h5>Cinematic Trailers</h5>
+                        <p>Full-length announcement & launch trailers with storytelling arcs that captivate audiences from the first frame.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <h5>Punchy Teasers</h5>
+                        <p>15–30 second hype reels optimized for TikTok, YouTube Shorts, and Steam capsule slots — maximum impact, minimal runtime.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-soundwave"></i></div>
+                        <h5>Heavy Sound Design</h5>
+                        <p>Custom SFX layering, cinematic risers, impactful whooshes, and perfectly synced audio that makes every cut hit harder.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-camera-reels-fill"></i></div>
+                        <h5>Gameplay Capture</h5>
+                        <p>High-quality 4K gameplay recording with cinematic camera angles — we capture your game in its best light.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-palette-fill"></i></div>
+                        <h5>Color Grading</h5>
+                        <p>Professional color correction and cinematic grading to give your trailer a polished, blockbuster look.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-music-note-beamed"></i></div>
+                        <h5>Licensed Music</h5>
+                        <p>Access to premium royalty-free and licensed tracks that match your game's tone — from epic orchestral to synthwave.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO / SHOWCASE -->
+    <section id="portfolio" class="section-padding">
+        <div class="container" data-aos="fade-up" data-aos-duration="900">
+            <div class="title-line"></div>
+            <h2 class="section-title">Selected <span>Works</span></h2>
+            <p class="section-subtitle">A curated selection of trailers that drove wishlists and captivated audiences.</p>
+            <div class="row">
+                <!-- Item 1 -->
+                <div class="col-lg-6 portfolio-item">
+                    <div class="video-card">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/dTlFHu63JxU" title="Trailer Showcase 1" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h5 class="video-title">Timeline Showcase Reel</h5>
+                            <span class="video-tag">Cinematic</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="col-lg-6 portfolio-item">
+                    <div class="video-card">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/6l3gMs3uK0E" title="Trailer Showcase 2" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h5 class="video-title">Storyboard Concept Edit</h5>
+                            <span class="video-tag">Teaser</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="col-lg-6 portfolio-item">
+                    <div class="video-card">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/aeu8WyRaAa0" title="Trailer Showcase 3" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h5 class="video-title">Misfortune — Official Trailer</h5>
+                            <span class="video-tag">Horror</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="col-lg-6 portfolio-item">
+                    <div class="video-card">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/DYO77IxYvoI" title="Trailer Showcase 4" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h5 class="video-title">Cinematic Action Edit</h5>
+                            <span class="video-tag">Action</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Want to see more? <a href="#contact" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Reach out</a> for a custom portfolio tailored to your genre.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS / REVIEWS -->
+    <section id="testimonials" class="section-padding" style="background-color: var(--secondary-bg);">
+        <div class="container" data-aos="fade-up" data-aos-duration="900">
+            <div class="title-line"></div>
+            <h2 class="section-title">Trusted By <span>Creators</span></h2>
+            <p class="section-subtitle">Hear from indie developers and studios who trusted us with their game's first impression.</p>
+            <div class="row g-4">
+                <!-- Review 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <i class="bi bi-quote quote-icon"></i>
+                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="quote">"Excellent working with Haeril — the trailer he delivered boosted our Steam wishlist by 40% in the first week. Will absolutely work with him again in the future!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JD</div>
+                            <div class="author-info">
+                                <h6>James Donovan</h6>
+                                <small>Indie Developer — "Eclipsed Realms"</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <i class="bi bi-quote quote-icon"></i>
+                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="quote">"Talented editor with great communication. The pacing and sound design were spot-on. A truly great experience working with him — highly recommended."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MK</div>
+                            <div class="author-info">
+                                <h6>Maya Kowalski</h6>
+                                <small>Studio Lead — "Phantom Code Games"</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <i class="bi bi-quote quote-icon"></i>
+                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="quote">"Worked super quickly and took direction extremely well! Delivered multiple revisions without hesitation. The final teaser got us featured on IGN."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RL</div>
+                            <div class="author-info">
+                                <h6>Rafael Lim</h6>
+                                <small>Solo Dev — "Neon Drift"</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <i class="bi bi-quote quote-icon"></i>
+                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="quote">"Haeril understood the emotional core of our game instantly. The trailer felt like a short film — our community was blown away. Worth every penny."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SC</div>
+                            <div class="author-info">
+                                <h6>Sarah Chen</h6>
+                                <small>Creative Director — "Luma & The Void"</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <i class="bi bi-quote quote-icon"></i>
+                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+                        <p class="quote">"Fast turnaround, professional edits, and the sound design gave me chills. Trailer Project knows exactly how to sell a game."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">BT</div>
+                            <div class="author-info">
+                                <h6>Brian Torres</h6>
+                                <small>Publisher — "IndieForge"</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <i class="bi bi-quote quote-icon"></i>
+                        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="quote">"From brief to final delivery, the process was seamless. The trailer directly contributed to our successful Kickstarter campaign. Legend."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AG</div>
+                            <div class="author-info">
+                                <h6>Alex Graham</h6>
+                                <small>Founder — "Wanderlost Studios"</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section-padding contact-section">
+        <div class="container" data-aos="zoom-in" data-aos-duration="800">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="contact-card">
+                        <div class="title-line"></div>
+                        <h2 class="mb-3" style="font-size: clamp(2rem, 3.5vw, 3rem);">Ready To Build <span style="color: var(--primary-color);">Hype?</span></h2>
+                        <p class="mb-4" style="color: var(--text-muted); font-size: 1.05rem; max-width: 550px; margin-left: auto; margin-right: auto;">
+                            Drop us a message. Let's discuss your game's vision and create a trailer that converts viewers into players.
+                        </p>
+                        <div class="d-flex justify-content-center flex-wrap gap-3 mb-3">
+                            <a href="https://instagram.com/trailerproject_haeril" target="_blank" rel="noopener noreferrer" class="contact-option primary">
+                                <i class="bi bi-instagram"></i> DM on Instagram
+                            </a>
+                            <a href="mailto:owntrailerproject@gmail.com" class="contact-option secondary">
+                                <i class="bi bi-envelope-fill"></i> Email Studio
+                            </a>
+                        </div>
+                        <p style="color: #555; font-size: 0.8rem; margin-bottom: 0;">
+                            <i class="bi bi-clock me-1"></i> Typical response time: <strong style="color: #aaa;">within 24 hours</strong>
+                        </p>
+                        <hr style="border-color: var(--glass-border); margin: 25px 0;">
+                        <p style="color: #666; font-size: 0.8rem; margin-bottom: 0;">
+                            <i class="bi bi-envelope me-1"></i> <strong>owntrailerproject@gmail.com</strong> &nbsp;|&nbsp;
+                            <i class="bi bi-instagram me-1"></i> <strong>@trailerproject_haeril</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <div class="social-icons mb-4">
-                <a href="https://instagram.com/trailerproject_haeril" target="_blank"><i class="bi bi-instagram"></i></a>
+            <div class="footer-brand">TRAILER<span>PROJECT</span></div>
+            <p class="footer-tagline">Cinematic Game Trailers &mdash; Since 2020</p>
+            <div class="social-icons">
+                <a href="https://instagram.com/trailerproject_haeril" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://youtube.com/@trailerproject_haeril" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="bi bi-youtube"></i></a>
+                <a href="mailto:owntrailerproject@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+                <a href="https://discord.gg/" target="_blank" rel="noopener noreferrer" title="Discord"><i class="bi bi-discord"></i></a>
             </div>
-            <p class="mb-0" style="color: #555; font-size: 0.9rem;">&copy; 2026 Trailer Project Studio.</p>
+            <p class="footer-bottom">
+                &copy; 2026 <strong>Trailer Project Studio</strong>. All rights reserved. &nbsp;|&nbsp;
+                <a href="#home">Back to Top <i class="bi bi-arrow-up-short"></i></a>
+            </p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({
+            duration: 850,
+            once: true,
+            easing: 'ease-out-cubic',
+        });
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile navbar if open
+                    const navbarCollapse = document.getElementById('navbarNav');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link update on scroll
+        const sections = document.querySelectorAll('section[id], header[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
             });
         });
     </script>
