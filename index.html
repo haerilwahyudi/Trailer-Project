@@ -1,737 +1,500 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trailer Project · High-Conversion Game Trailers for Steam</title>
-    <meta name="description" content="Transform raw gameplay into high-converting cinematic trailers. Steam-compliant, Kickstarter-ready, and engineered to hook players in 5 seconds." />
-
-    <!-- Bootstrap 5 + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <title>Trailer Project · Cinematic Game Trailers</title>
+    <meta name="description" content="Transform raw gameplay into high-converting cinematic trailers. Trusted by indie devs worldwide." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ── Reset / Base ── */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            background: #050505;
-            color: #e0e0e0;
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            background: #0a0a0f;
+            color: #fff;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
-        a { text-decoration: none; color: inherit; }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Sora', sans-serif;
-            letter-spacing: -0.5px;
-            font-weight: 800;
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7c3aed;
+            border-radius: 4px;
         }
 
-        /* ── Custom Scrollbar ── */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #e50914; border-radius: 4px; }
-
-        /* ── FIX: Missing class ── */
-        .text-muted-light { color: #999 !important; }
-
-        /* ── Colors & Utilities ── */
-        .text-accent { color: #e50914; }
-        .bg-accent { background-color: #e50914; }
-
-        /* ── Navbar ── */
-        .navbar-custom {
-            background: rgba(5, 5, 5, 0.85);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-dark {
+            background: rgba(10, 10, 15, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 16px 0;
-            transition: all 0.3s ease;
         }
-        .navbar-custom.scrolled {
-            padding: 10px 0;
-            background: rgba(5, 5, 5, 0.95);
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #d946ef, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .navbar-custom .brand {
-            font-family: 'Sora', sans-serif;
-            font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: -0.5px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .gradient-text-secondary {
+            background: linear-gradient(135deg, #22d3ee, #06b6d4, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .navbar-custom .brand i {
-            color: #e50914;
-            font-size: 1.6rem;
-        }
-        .navbar-custom .nav-link {
-            color: #888 !important;
-            font-weight: 500;
-            font-size: 0.9rem;
-            padding: 8px 18px !important;
-            transition: color 0.2s;
+        .btn-glow {
             position: relative;
+            overflow: hidden;
         }
-        .navbar-custom .nav-link:hover,
-        .navbar-custom .nav-link.active {
-            color: #fff !important;
-        }
-        .navbar-custom .nav-link.active::after {
+        .btn-glow::before {
             content: '';
             position: absolute;
-            bottom: 4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            background: #e50914;
-            border-radius: 50%;
-        }
-        .btn-hire {
-            background: #e50914;
-            border: none;
-            color: #fff !important;
-            font-weight: 600;
-            font-size: 0.85rem;
-            padding: 10px 24px;
-            border-radius: 6px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
-        }
-        .btn-hire:hover {
-            background: #ff0a1e;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(229, 9, 20, 0.5);
-        }
-        .navbar-dark .navbar-toggler {
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        .navbar-dark .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-
-        /* ── Hero Section ── */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            text-align: center;
-            padding: 120px 0 80px;
-            overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background:
-                radial-gradient(circle at 50% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(50, 50, 50, 0.2) 0%, transparent 50%),
-                #050505;
-            z-index: -2;
-        }
-        .hero-bg::after {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            z-index: -1;
-            pointer-events: none;
-        }
-        .hero h1 {
-            font-size: clamp(2.8rem, 7vw, 5.5rem);
-            line-height: 1.1;
-            margin-bottom: 24px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .hero p {
-            max-width: 700px;
-            margin: 0 auto 40px;
-            color: #aaa;
-            font-size: 1.15rem;
-            font-weight: 300;
-        }
-        .btn-primary-custom {
-            background: #e50914;
-            border: none;
-            color: #fff;
-            padding: 16px 36px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border-radius: 8px;
-            transition: all 0.3s;
-            box-shadow: 0 8px 24px rgba(229, 9, 20, 0.3);
-            font-family: 'Sora', sans-serif;
-        }
-        .btn-primary-custom:hover {
-            background: #ff0a1e;
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5);
-        }
-        .btn-outline-light-custom {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 16px 36px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border-radius: 8px;
-            transition: all 0.3s;
-            background: rgba(255,255,255,0.03);
-            font-family: 'Sora', sans-serif;
-        }
-        .btn-outline-light-custom:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.5);
-            color: #fff;
-        }
-        .tech-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 8px 20px;
-            border-radius: 30px;
-            color: #888;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            margin-top: 30px;
-        }
-        .tech-badge i { color: #e50914; margin-right: 8px; }
-
-        /* ── Trust Bar ── */
-        .trust-bar {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 24px 0;
-            background: #080808;
-        }
-        .trust-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: #888;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .trust-item i { color: #e50914; font-size: 1.2rem; }
-
-        /* ── Sections ── */
-        .section { padding: 120px 0; }
-        .section-dark { background: #080808; }
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        .section-sub {
-            text-align: center;
-            color: #888;
-            max-width: 700px;
-            margin: 0 auto 60px;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-        .title-line {
-            width: 50px; height: 4px;
-            background: #e50914;
-            margin: 0 auto 20px;
-            border-radius: 4px;
-        }
-
-        /* ── Services / Feature Cards ── */
-        .feature-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 32px;
-            border-radius: 16px;
-            height: 100%;
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(229, 9, 20, 0.3);
-            transform: translateY(-5px);
-        }
-        .feature-icon {
-            width: 50px; height: 50px;
-            background: rgba(229, 9, 20, 0.1);
-            color: #e50914;
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        .feature-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
-        .feature-card p { color: #888; font-size: 0.95rem; margin: 0; }
-
-        /* ── Process / Expectations ── */
-        .process-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 28px 24px;
-            border-radius: 12px;
-            height: 100%;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .process-card:hover {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(229, 9, 20, 0.25);
-        }
-        .process-card .number {
-            font-family: 'Sora', sans-serif;
-            font-weight: 800;
-            font-size: 2.5rem;
-            color: #e50914;
-            opacity: 0.5;
-            line-height: 1;
-            margin-bottom: 12px;
-        }
-        .process-card h5 { color: #fff; font-size: 1rem; margin-bottom: 8px; }
-        .process-card p { color: #888; font-size: 0.9rem; margin: 0; }
-
-        /* ── Portfolio / Work Cards ── */
-        .portfolio-card {
-            background: #0d0d0d;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            overflow: hidden;
-            height: 100%;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .portfolio-card:hover {
-            border-color: rgba(229, 9, 20, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            transform: translateY(-5px);
-        }
-        .portfolio-thumb {
-            position: relative;
-            height: 200px;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .thumb-bg-1 { background: radial-gradient(circle at 50% 50%, #2a0507 0%, #000 100%); }
-        .thumb-bg-2 { background: radial-gradient(circle at 50% 50%, #052a1c 0%, #000 100%); }
-        .thumb-bg-3 { background: radial-gradient(circle at 50% 50%, #0a0a2a 0%, #000 100%); }
-
-        .play-icon {
-            width: 60px; height: 60px;
-            background: rgba(229, 9, 20, 0.9);
-            color: #fff;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
-            transition: all 0.3s;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .portfolio-card:hover .play-icon {
-            transform: scale(1.1);
-            box-shadow: 0 0 0 12px rgba(229, 9, 20, 0);
-        }
-        .portfolio-info { padding: 24px; }
-        .project-name {
-            font-family: 'Sora', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-        .project-meta {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .stars { color: #f5b342; font-size: 0.9rem; margin-bottom: 12px; }
-        .quote-text {
-            color: #aaa;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            font-style: italic;
-            margin-bottom: 16px;
-            border-left: 2px solid rgba(229,9,20,0.5);
-            padding-left: 12px;
-        }
-        .badge-group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-        .badge-custom {
-            background: rgba(255, 255, 255, 0.05);
-            color: #888;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .price-tag {
-            font-size: 0.85rem;
-            color: #666;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 12px;
-        }
-        .price-tag strong { color: #fff; font-size: 1rem; font-weight: 700; }
-
-        /* ── Testimonials ── */
-        .testimonial-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 32px;
-            border-radius: 16px;
-            height: 100%;
-            position: relative;
-        }
-        .quote-mark {
-            position: absolute;
-            top: 20px; right: 24px;
-            font-size: 4rem;
-            font-family: serif;
-            color: rgba(255,255,255,0.05);
-            line-height: 1;
-        }
-        .client-info { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
-        .client-avatar {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: #222;
-            display: flex; align-items: center; justify-content: center;
-            color: #e50914;
-            font-weight: 700;
-        }
-
-        /* ── Contact ── */
-        .contact-box {
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 24px;
-            padding: 60px 40px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-        .btn-email {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex; align-items: center; gap: 8px;
-        }
-        .btn-email:hover { background: #fff; color: #000; }
-        .btn-ig {
-            background: linear-gradient(135deg, #405de6, #833ab4, #fd1d1d);
-            border: none;
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex; align-items: center; gap: 8px;
-        }
-        .btn-ig:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(131, 58, 180, 0.4); color: #fff; }
-
-        /* ── Back to Top ── */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 48px;
-            height: 48px;
-            background: #e50914;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
-            transition: all 0.3s;
-            z-index: 999;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
             opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            cursor: pointer;
+            transition: opacity 0.5s;
+            pointer-events: none;
         }
-        .back-to-top.show {
+        .btn-glow:hover::before {
             opacity: 1;
-            visibility: visible;
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
+        }
+
+        .ambient-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            animation: ambientFloat 20s ease-in-out infinite alternate;
+        }
+        .ambient-orb:nth-child(2) {
+            animation-delay: -5s;
+        }
+        .ambient-orb:nth-child(3) {
+            animation-delay: -10s;
+        }
+        @keyframes ambientFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(40px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 40px) scale(0.9);
+            }
+            100% {
+                transform: translate(30px, -20px) scale(1.05);
+            }
+        }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-16px);
+            }
+        }
+        @keyframes float-slow {
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-slow {
+            animation: float-slow 10s ease-in-out infinite;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+        @keyframes ping {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            75%,
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        .animate-ping {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .animate-bounce {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
             transform: translateY(0);
         }
-        .back-to-top:hover {
-            background: #ff0a1e;
-            transform: scale(1.05);
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
-        /* ── Footer ── */
-        .footer { background: #020202; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); }
-        .footer-brand { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.2rem; }
-
-        /* ── Video Modal ── */
-        .modal-content {
-            background: #0d0d0d;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
         }
-        .modal-content .modal-header {
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 16px 20px;
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .modal-content .btn-close {
-            filter: invert(1);
-            opacity: 0.6;
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
         }
-        .modal-content .btn-close:hover { opacity: 1; }
+        .stagger-children>* {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .stagger-children.active>*:nth-child(1) {
+            transition-delay: 0.05s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-children.active>*:nth-child(2) {
+            transition-delay: 0.10s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-children.active>*:nth-child(3) {
+            transition-delay: 0.15s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-children.active>*:nth-child(4) {
+            transition-delay: 0.20s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-children.active>*:nth-child(5) {
+            transition-delay: 0.25s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-children.active>*:nth-child(6) {
+            transition-delay: 0.30s;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         @media (max-width: 768px) {
-            .section { padding: 80px 0; }
-            .hero { min-height: auto; padding: 140px 0 80px; }
-            .contact-box { padding: 36px 20px; }
-            .back-to-top { width: 42px; height: 42px; font-size: 1.2rem; bottom: 20px; right: 20px; }
+            .glass-card {
+                backdrop-filter: blur(8px);
+            }
+            .ambient-orb {
+                filter: blur(60px);
+            }
         }
     </style>
 </head>
-
 <body>
 
     <!-- ═══ NAVBAR ═══ -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" id="mainNav">
-        <div class="container">
-            <a class="brand" href="#home">
-                <i class="bi bi-collection-play-fill"></i>
-                TRAILER<span class="text-accent">PROJECT</span>
-            </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#work">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#reviews">Testimonials</a></li>
-                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a href="#contact" class="btn btn-hire">Message Me <i class="bi bi-arrow-right ms-1"></i></a>
-                    </li>
-                </ul>
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                        <div class="relative h-10 w-10 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3" fill="currentColor" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Trailer Project</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium relative group">Services <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 group-hover:w-full transition-all duration-300"></span></a>
+                    <a href="#showcase" class="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium relative group">Portfolio <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 group-hover:w-full transition-all duration-300"></span></a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium relative group">Pricing <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 group-hover:w-full transition-all duration-300"></span></a>
+                    <a href="#faq" class="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium relative group">FAQ <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 group-hover:w-full transition-all duration-300"></span></a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#contact" class="relative group px-6 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold text-sm overflow-hidden btn-glow">
+                        <span class="relative z-10">Start Your Project</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-white">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 glass-card rounded-2xl p-4 hidden">
+                <a href="#services" class="block py-3 text-gray-300 hover:text-white transition-colors">Services</a>
+                <a href="#showcase" class="block py-3 text-gray-300 hover:text-white transition-colors">Portfolio</a>
+                <a href="#pricing" class="block py-3 text-gray-300 hover:text-white transition-colors">Pricing</a>
+                <a href="#faq" class="block py-3 text-gray-300 hover:text-white transition-colors">FAQ</a>
+                <a href="#contact" class="block mt-4 w-full text-center px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold">Start Your Project</a>
             </div>
         </div>
     </nav>
 
     <!-- ═══ HERO ═══ -->
-    <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <div class="container" data-aos="fade-up" data-aos-duration="1000">
-            <div class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill mb-4 border border-danger border-opacity-25">
-                <i class="bi bi-star-fill me-1"></i> 5.0 Rated · Steam & Kickstarter Specialist
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="ambient-bg">
+            <div class="ambient-orb w-96 h-96 bg-violet-600/30 top-1/4 -left-48"></div>
+            <div class="ambient-orb w-80 h-80 bg-fuchsia-600/20 top-1/2 -right-40"></div>
+            <div class="ambient-orb w-64 h-64 bg-cyan-600/20 bottom-1/4 left-1/3"></div>
+        </div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card mb-8 animate-fade-in-up">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>
+                <span class="text-sm text-gray-300">5.0 Rated · Trusted by 150+ Indie Studios</span>
             </div>
-            <h1>Most Games Fail in the <span class="text-accent">First 5 Seconds.</span></h1>
-            <p>Transform raw gameplay into high-converting, cinematic trailers engineered for Steam wishlists, Kickstarter funding, and massive sales. Your game deserves more than a screen recording set to music.</p>
-            <div class="d-flex flex-wrap justify-content-center gap-3">
-                <a href="#work" class="btn btn-primary-custom"><i class="bi bi-play-circle-fill me-2"></i>Watch Showcase</a>
-                <a href="#contact" class="btn btn-outline-light-custom"><i class="bi bi-chat-dots-fill me-2"></i>Start Your Project</a>
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6 animate-fade-in-up" style="animation-delay:0.1s">
+                Most Games Fail<br>in the <span class="gradient-text">First 5 Seconds.</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style="animation-delay:0.2s">
+                Transform raw gameplay into high-converting cinematic trailers engineered for Steam wishlists, Kickstarter funding, and massive sales. Your game deserves more than a screen recording set to music.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in-up" style="animation-delay:0.3s">
+                <a href="#showcase" class="group relative px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg overflow-hidden btn-glow w-full sm:w-auto">
+                    <span class="relative z-10 flex items-center justify-center space-x-2"><span>Watch Showcase</span><svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+                <a href="#contact" class="group px-8 py-4 rounded-full glass-card text-white font-semibold text-lg hover:bg-white/10 transition-all duration-300 w-full sm:w-auto flex items-center justify-center space-x-2">
+                    <svg class="w-5 h-5 text-violet-400" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                    <span>Start Your Project</span>
+                </a>
             </div>
-            <div class="tech-badge">
-                <i class="bi bi-check-circle-fill"></i> Crafted exclusively in DaVinci Resolve Studio with cinematic color grading & precise sound design
+            <div class="relative max-w-5xl mx-auto animate-fade-in-up" style="animation-delay:0.4s">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-purple-900/30">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10"></div>
+                    <div class="aspect-video bg-gradient-to-br from-violet-900/50 via-fuchsia-900/30 to-cyan-900/30 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm mb-4 group cursor-pointer hover:scale-110 transition-transform duration-300">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                            </div>
+                            <p class="text-gray-400 text-sm">Watch our showreel</p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-2xl opacity-20 blur-2xl animate-float"></div>
+                    <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full opacity-20 blur-xl animate-float-slow"></div>
+                </div>
+                <div class="absolute -bottom-6 left-4 right-4 flex flex-wrap justify-center gap-4">
+                    <div class="glass-card rounded-xl px-6 py-4 animate-float" style="animation-delay:-2s"><div class="text-2xl font-bold gradient-text">150+</div><div class="text-xs text-gray-400">Trailers Delivered</div></div>
+                    <div class="glass-card rounded-xl px-6 py-4 animate-float" style="animation-delay:-4s"><div class="text-2xl font-bold gradient-text">98%</div><div class="text-xs text-gray-400">Client Satisfaction</div></div>
+                    <div class="glass-card rounded-xl px-6 py-4 animate-float" style="animation-delay:-6s"><div class="text-2xl font-bold gradient-text">5.0★</div><div class="text-xs text-gray-400">Average Rating</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"><svg class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg></div>
+    </section>
+
+    <!-- ═══ SOCIAL PROOF ═══ -->
+    <section class="py-16 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 text-sm mb-8 animate-fade-in-up">TRUSTED BY GAME CREATORS WORLDWIDE</p>
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+                <div class="text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors duration-300 animate-fade-in-up" style="animation-delay:0s">Steam</div>
+                <div class="text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors duration-300 animate-fade-in-up" style="animation-delay:0.1s">Kickstarter</div>
+                <div class="text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors duration-300 animate-fade-in-up" style="animation-delay:0.2s">Unity</div>
+                <div class="text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors duration-300 animate-fade-in-up" style="animation-delay:0.3s">Unreal Engine</div>
+                <div class="text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors duration-300 animate-fade-in-up" style="animation-delay:0.4s">Discord</div>
+                <div class="text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors duration-300 animate-fade-in-up" style="animation-delay:0.5s">IGN</div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ TRUST BAR ═══ -->
-    <div class="trust-bar">
-        <div class="container">
-            <div class="row text-center g-3">
-                <div class="col-md-4" data-aos="fade-up">
-                    <div class="trust-item"><i class="bi bi-graph-up-arrow"></i> 150+ Trailers Delivered</div>
+    <!-- ═══ SERVICES ═══ -->
+    <section id="services" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-violet-400 font-semibold text-sm uppercase tracking-wider">Services</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">What <span class="gradient-text">I Deliver</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">From Steam page hooks to social media gold — every cut is built on psychology, rhythm, and raw impact.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children" id="servicesGrid">
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Steam-Compliant Trailers</h3>
+                    <p class="text-gray-400 leading-relaxed">Cinematic, store-ready trailers optimized to meet Steam's guidelines and engineered to maximize that initial hook-rate.</p>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="trust-item"><i class="bi bi-award-fill"></i> 98% Client Satisfaction</div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-fuchsia-500 to-pink-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Teaser & Kickstarter Promos</h3>
+                    <p class="text-gray-400 leading-relaxed">High-tension pacing and elite audio-visual synchronization designed to build massive pre-launch hype and crush your funding goals.</p>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="trust-item"><i class="bi bi-lightning-charge-fill"></i> Response < 24 Hours</div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Vertical Social Ads</h3>
+                    <p class="text-gray-400 leading-relaxed">Engaging short-form cuts tailored for TikTok, Shorts, and Reels — built to stop thumbs and drive organic traffic to your Steam page.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-2M9 14l2 2 4-4" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Launch & Update Promos</h3>
+                    <p class="text-gray-400 leading-relaxed">Dynamic milestone edits designed to re-energize your community and bring lapsed wishlisters back into the fold.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Cinematic Color Grading</h3>
+                    <p class="text-gray-400 leading-relaxed">Professional color correction and grading to give your trailer a polished, blockbuster look that stands out on every screen.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500 to-red-500 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Pro Sound Design</h3>
+                    <p class="text-gray-400 leading-relaxed">Custom SFX layering, cinematic risers, impactful whooshes, and perfectly synced audio that makes every cut hit harder.</p>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- ═══ SERVICES (Tailored to your copy) ═══ -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="title-line" data-aos="fade-down"></div>
-            <h2 class="section-title" data-aos="fade-up">What <span class="text-accent">I Deliver</span></h2>
-            <p class="section-sub" data-aos="fade-up">From Steam page hooks to social media gold — every cut is built on psychology, rhythm, and raw impact.</p>
-
-            <div class="row g-4">
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="bi bi-steam"></i></div>
-                        <h4>Steam-Compliant Gameplay Trailers</h4>
-                        <p>A cinematic, store-ready trailer optimized to meet Steam's guidelines and engineered for one purpose: maximizing that initial hook-rate.</p>
-                    </div>
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
-                        <h4>Teaser Trailers & Kickstarter Promos</h4>
-                        <p>High-tension pacing and elite audio-visual synchronization designed to build massive pre-launch hype and crush your funding goals. You'll feel the energy the moment the first beat drops.</p>
-                    </div>
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="bi bi-phone"></i></div>
-                        <h4>Vertical Social Media Ads</h4>
-                        <p>Engaging short-form cuts tailored for TikTok, Shorts, and Reels, built to stop thumbs and send organic traffic directly to your Steam page.</p>
-                    </div>
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="350">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="bi bi-arrow-repeat"></i></div>
-                        <h4>Launch & Update Promos</h4>
-                        <p>Dynamic milestone edits designed to re-energize your existing community and bring lapsed wishlisters back into the fold.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══ PROCESS / EXPECTATIONS (New Section) ═══ -->
-    <section class="section section-dark" id="process">
-        <div class="container">
-            <div class="title-line" data-aos="fade-down"></div>
-            <h2 class="section-title" data-aos="fade-up">What You Can <span class="text-accent">Expect</span></h2>
-            <p class="section-sub" data-aos="fade-up">A structured, stress-free workflow backed by a verified 5.0-star rating.</p>
-
-            <div class="row g-4">
-                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="50">
-                    <div class="process-card">
-                        <div class="number">01</div>
-                        <h5>Clear Communication</h5>
-                        <p>No ghosting, ever. You'll always know where your project stands.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="process-card">
-                        <div class="number">02</div>
-                        <h5>Structured Workflow</h5>
-                        <p>Seamless guidance from raw footage selection and storyboarding to final master export.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="150">
-                    <div class="process-card">
-                        <div class="number">03</div>
-                        <h5>On-Time Delivery</h5>
-                        <p>Your marketing timeline is sacred. Deadlines are respected, period.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="process-card">
-                        <div class="number">04</div>
-                        <h5>Collaborative Revisions</h5>
-                        <p>A streamlined feedback process to refine every frame until it perfectly aligns with your vision.</p>
-                    </div>
+            <div class="text-center mt-12 reveal">
+                <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-800/80 text-white text-sm font-medium border border-slate-700">
+                    <svg class="w-5 h-5 text-violet-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
+                    Crafted exclusively in DaVinci Resolve Studio with cinematic color grading & precise sound design
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ WORK / PORTFOLIO ═══ -->
-    <section class="section" id="work">
-        <div class="container">
-            <div class="title-line" data-aos="fade-down"></div>
-            <h2 class="section-title" data-aos="fade-up">Recent <span class="text-accent">Projects</span></h2>
-            <p class="section-sub" data-aos="fade-up">Real client work from the portfolio — delivering results, not just edits.</p>
-
-            <div class="row g-4">
+    <!-- ═══ SHOWCASE ═══ -->
+    <section id="showcase" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/20 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-fuchsia-400 font-semibold text-sm uppercase tracking-wider">Portfolio</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">Recent <span class="gradient-text">Projects</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Real client work — delivering results, not just edits.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 stagger-children" id="showcaseGrid">
                 <!-- Project 1 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="portfolio-card" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/dTlFHu63JxU">
-                        <div class="portfolio-thumb thumb-bg-1">
-                            <div class="play-icon"><i class="bi bi-play-fill"></i></div>
+                <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
+                    <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
+                        <div class="aspect-video bg-gradient-to-br from-violet-900/50 to-indigo-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden">
+                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                            </div>
+                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Click to preview</span><span>▶ 0:30</span></div>
                         </div>
-                        <div class="portfolio-info">
-                            <div class="project-name">Cinematic Trailer for Steam</div>
-                            <div class="project-meta"><i class="bi bi-calendar3"></i> Jun 24 – Jul 2, 2026</div>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                <span class="ms-1 text-muted-light">5.0</span>
-                            </div>
-                            <div class="quote-text">“Talented person with great communication. A great experience to work with him.”</div>
-                            <div class="badge-group">
-                                <span class="badge-custom">Clear Communicator</span>
-                                <span class="badge-custom">Detail Oriented</span>
-                                <span class="badge-custom">Game Trailer</span>
-                            </div>
-                            <div class="price-tag"><strong>$350.00</strong> · Fixed Price</div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-1">Cinematic Trailer for Steam</h3>
+                            <p class="text-slate-400 text-sm mb-3"><svg class="inline w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>Jun 24 – Jul 2, 2026</p>
+                            <div class="flex text-yellow-400 text-sm mb-3"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><span class="text-slate-400 text-xs ml-2">5.0</span></div>
+                            <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Talented person with great communication. A great experience to work with him."</p>
+                            <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Clear Communicator</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Detail Oriented</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
+                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between"><span class="text-white font-bold">$350.00</span><span class="text-slate-500 text-xs">Fixed Price</span></div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Project 2 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="portfolio-card" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/6l3gMs3uK0E">
-                        <div class="portfolio-thumb thumb-bg-2">
-                            <div class="play-icon"><i class="bi bi-play-fill"></i></div>
+                <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
+                    <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
+                        <div class="aspect-video bg-gradient-to-br from-emerald-900/50 to-teal-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden">
+                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                            </div>
+                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Click to preview</span><span>▶ 0:30</span></div>
                         </div>
-                        <div class="portfolio-info">
-                            <div class="project-name">Cinematic Trailer for Steam</div>
-                            <div class="project-meta"><i class="bi bi-calendar3"></i> Jun 20 – Jun 24, 2026</div>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                <span class="ms-1 text-muted-light">5.0</span>
-                            </div>
-                            <div class="quote-text">“Excellent working with Haeril, will absolutely work with him again in the future!”</div>
-                            <div class="badge-group">
-                                <span class="badge-custom">Committed to Quality</span>
-                                <span class="badge-custom">Movie Trailer</span>
-                                <span class="badge-custom">Game Trailer</span>
-                            </div>
-                            <div class="price-tag"><strong>$500.00</strong> · Fixed Price</div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-1">Cinematic Trailer for Steam</h3>
+                            <p class="text-slate-400 text-sm mb-3"><svg class="inline w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>Jun 20 – Jun 24, 2026</p>
+                            <div class="flex text-yellow-400 text-sm mb-3"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><span class="text-slate-400 text-xs ml-2">5.0</span></div>
+                            <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Excellent working with Haeril, will absolutely work with him again in the future!"</p>
+                            <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Committed to Quality</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Movie Trailer</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
+                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between"><span class="text-white font-bold">$500.00</span><span class="text-slate-500 text-xs">Fixed Price</span></div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Project 3 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="portfolio-card" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/aeu8WyRaAa0">
-                        <div class="portfolio-thumb thumb-bg-3">
-                            <div class="play-icon"><i class="bi bi-play-fill"></i></div>
+                <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
+                    <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
+                        <div class="aspect-video bg-gradient-to-br from-slate-900/50 to-violet-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden">
+                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                            </div>
+                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Click to preview</span><span>▶ 0:30</span></div>
                         </div>
-                        <div class="portfolio-info">
-                            <div class="project-name">Video Editor — Travel &amp; Sentimental</div>
-                            <div class="project-meta"><i class="bi bi-calendar3"></i> Sep 9 – Nov 21, 2025</div>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                <span class="ms-1 text-muted-light">5.0</span>
-                            </div>
-                            <div class="quote-text">“Worked super quickly and took direction well. Highly reliable for storytelling.”</div>
-                            <div class="badge-group">
-                                <span class="badge-custom">Reliable</span>
-                                <span class="badge-custom">Collaborative</span>
-                                <span class="badge-custom">Accountable</span>
-                            </div>
-                            <div class="price-tag"><strong>—</strong> · Fixed Price</div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-1">Video Editor — Travel & Sentimental</h3>
+                            <p class="text-slate-400 text-sm mb-3"><svg class="inline w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>Sep 9 – Nov 21, 2025</p>
+                            <div class="flex text-yellow-400 text-sm mb-3"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><span class="text-slate-400 text-xs ml-2">5.0</span></div>
+                            <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Worked super quickly and took direction well. Highly reliable for storytelling."</p>
+                            <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Reliable</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Collaborative</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Accountable</span></div>
+                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between"><span class="text-white font-bold">—</span><span class="text-slate-500 text-xs">Fixed Price</span></div>
                         </div>
                     </div>
                 </div>
@@ -739,211 +502,289 @@
         </div>
     </section>
 
-    <!-- ═══ REVIEWS ═══ -->
-    <section class="section section-dark" id="reviews">
-        <div class="container">
-            <div class="title-line" data-aos="fade-down"></div>
-            <h2 class="section-title" data-aos="fade-up">What <span class="text-accent">Clients Say</span></h2>
-            <p class="section-sub" data-aos="fade-up">Trusted by creative directors, indie studios, and publishers worldwide.</p>
-
-            <div class="row g-4">
-                <div class="col-md-6" data-aos="fade-right">
-                    <div class="testimonial-box">
-                        <div class="quote-mark">”</div>
-                        <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="quote-text border-0 p-0">“Haeril understood the emotional core of our game instantly. The trailer felt like a short film — our community was blown away. Conversion rates went up significantly.”</p>
-                        <div class="client-info">
-                            <div class="client-avatar">SC</div>
-                            <div>
-                                <div style="color:#fff; font-weight:600; font-size:0.9rem;">Sarah Chen</div>
-                                <div style="color:#666; font-size:0.8rem;">Creative Director</div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- ═══ BENEFITS ═══ -->
+    <section id="benefits" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-cyan-400 font-semibold text-sm uppercase tracking-wider">Why Trailer Project</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">The Smart Choice for<br><span class="gradient-text-secondary">Game Marketing</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 stagger-children" id="benefitsGrid">
+                <div class="glass-card rounded-2xl p-8 text-center card-hover">
+                    <div class="text-5xl md:text-6xl font-black gradient-text-secondary mb-4">3x</div>
+                    <h3 class="text-xl font-bold mb-3">Faster Turnaround</h3>
+                    <p class="text-gray-400">What used to take weeks now takes days. I work efficiently without cutting corners.</p>
                 </div>
-
-                <div class="col-md-6" data-aos="fade-left">
-                    <div class="testimonial-box">
-                        <div class="quote-mark">”</div>
-                        <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="quote-text border-0 p-0">“Fast turnaround, professional edits, and the sound design gave me chills. Trailer Project knows exactly how to sell a game in 60 seconds.”</p>
-                        <div class="client-info">
-                            <div class="client-avatar">BT</div>
-                            <div>
-                                <div style="color:#fff; font-weight:600; font-size:0.9rem;">Brian Torres</div>
-                                <div style="color:#666; font-size:0.8rem;">Indie Game Publisher</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="glass-card rounded-2xl p-8 text-center card-hover">
+                    <div class="text-5xl md:text-6xl font-black gradient-text-secondary mb-4">40%+</div>
+                    <h3 class="text-xl font-bold mb-3">More Wishlists</h3>
+                    <p class="text-gray-400">Clients report significant wishlist growth within the first week of launching their trailer.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-8 text-center card-hover">
+                    <div class="text-5xl md:text-6xl font-black gradient-text-secondary mb-4">Pro</div>
+                    <h3 class="text-xl font-bold mb-3">Premium Sound Design</h3>
+                    <p class="text-gray-400">Custom SFX, cinematic risers, and perfectly synced audio that hits hard.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ CONTACT ═══ -->
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9" data-aos="zoom-in">
-                    <div class="contact-box">
-                        <div class="text-accent mb-3" style="font-size: 2.5rem;">
-                            <i class="bi bi-send-fill"></i>
-                        </div>
-                        <h3 style="font-size: clamp(1.8rem, 4vw, 2.8rem);">Ready to Turn <span class="text-accent">Viewers into Players?</span></h3>
-                        <p style="color:#888; max-width:480px; margin: 10px auto 32px; font-size: 1.1rem;">
-                            Send over a clip of your project. Let's discuss how to build a trailer that plays as well as your game does.
-                        </p>
-
-                        <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
-                            <a href="mailto:owntrailerproject@gmail.com" class="btn-email">
-                                <i class="bi bi-envelope-fill"></i> owntrailerproject@gmail.com
-                            </a>
-                            <a href="https://www.instagram.com/trailerproject_haeril/" target="_blank" rel="noopener" class="btn-ig">
-                                <i class="bi bi-instagram"></i> Message on Instagram
-                            </a>
-                        </div>
-
-                        <hr style="border-color: rgba(255,255,255,0.06); margin: 30px 0 20px;">
-                        <div style="font-size:0.85rem; color:#555; letter-spacing: 1px; text-transform: uppercase;">
-                            <i class="bi bi-shield-check text-accent me-1"></i> 100% Confidential &nbsp;·&nbsp;
-                            <i class="bi bi-clock text-accent me-1"></i> Response < 24 Hours
-                        </div>
-                    </div>
+    <!-- ═══ TESTIMONIALS ═══ -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-fuchsia-950/20 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-fuchsia-400 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">Trusted by<br><span class="gradient-text">Game Creators</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Hear from indie developers and studios who trusted me with their game's first impression.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 stagger-children" id="testimonialsGrid">
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-4"><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">"Excellent working with Haeril — the trailer he delivered boosted our Steam wishlist by 40% in the first week. Will absolutely work with him again in the future!"</p>
+                    <div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-bold">JD</div><div><div class="font-semibold">James Donovan</div><div class="text-sm text-gray-400">Indie Developer — 'Eclipsed Realms'</div></div></div>
                 </div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-4"><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">"Talented editor with great communication. The pacing and sound design were spot-on. A truly great experience working with him — highly recommended."</p>
+                    <div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-bold">MK</div><div><div class="font-semibold">Maya Kowalski</div><div class="text-sm text-gray-400">Studio Lead — 'Phantom Code Games'</div></div></div>
+                </div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-4"><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">"Worked super quickly and took direction extremely well! Delivered multiple revisions without hesitation. The final teaser got us featured on IGN."</p>
+                    <div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-bold">RL</div><div><div class="font-semibold">Rafael Lim</div><div class="text-sm text-gray-400">Solo Dev — 'Neon Drift'</div></div></div>
+                </div>
+                <div class="glass-card rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-4"><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">"Haeril understood the emotional core of our game instantly. The trailer felt like a short film — our community was blown away. Conversion rates went up significantly."</p>
+                    <div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-bold">SC</div><div><div class="font-semibold">Sarah Chen</div><div class="text-sm text-gray-400">Creative Director — 'Luma & The Void'</div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PRICING ═══ -->
+    <section id="pricing" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-amber-400 font-semibold text-sm uppercase tracking-wider">Pricing</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">Simple, <span class="gradient-text">Project-Based</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Every trailer is custom-quoted based on your footage, duration, and complexity. Here are our most popular packages.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 stagger-children" id="pricingGrid">
+                <div class="relative glass-card rounded-2xl p-8 card-hover">
+                    <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Starter</h3><p class="text-gray-400 text-sm">Perfect for indie devs on a budget</p></div>
+                    <div class="mb-6"><span class="text-5xl font-black">$350</span><span class="text-gray-400">/per project</span></div>
+                    <ul class="space-y-4 mb-8"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">60–90 second trailer</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">1080p export</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Basic sound design</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">2 rounds of revisions</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Steam & YouTube ready</span></li></ul>
+                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 glass-card hover:bg-white/10">Inquire Now</a>
+                </div>
+                <div class="relative glass-card rounded-2xl p-8 card-hover border-violet-500/50 shadow-lg shadow-violet-900/20">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 text-sm font-semibold">Most Popular</div>
+                    <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Pro</h3><p class="text-gray-400 text-sm">For studios serious about marketing</p></div>
+                    <div class="mb-6"><span class="text-5xl font-black">$500</span><span class="text-gray-400">/per project</span></div>
+                    <ul class="space-y-4 mb-8"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">90–120 second trailer</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">4K export</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Advanced sound design</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">3 rounds of revisions</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Full color grading</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Social media cuts included</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Priority delivery</span></li></ul>
+                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white btn-glow">Inquire Now</a>
+                </div>
+                <div class="relative glass-card rounded-2xl p-8 card-hover">
+                    <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Studio</h3><p class="text-gray-400 text-sm">Custom packages for publishers</p></div>
+                    <div class="mb-6"><span class="text-5xl font-black">Custom</span><span class="text-gray-400">/quote based</span></div>
+                    <ul class="space-y-4 mb-8"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Multi-trailer packages</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">4K + vertical exports</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Premium sound design</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Unlimited revisions</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Dedicated collaboration</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Full project files</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">SLA guarantee</span></li></ul>
+                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 glass-card hover:bg-white/10">Contact Sales</a>
+                </div>
+            </div>
+            <div class="text-center mt-12 reveal"><p class="text-gray-400">Need a custom package? <a href="#contact" class="text-violet-400 hover:text-violet-300 font-medium underline underline-offset-4">Let's talk about your project</a></p></div>
+        </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section id="faq" class="py-24 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-emerald-400 font-semibold text-sm uppercase tracking-wider">FAQ</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">Frequently Asked<br><span class="gradient-text">Questions</span></h2>
+            </div>
+            <div class="space-y-4 stagger-children" id="faqGrid">
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <span class="font-semibold pr-8">What do I need to get started?</span>
+                        <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Send me your raw gameplay footage (at least 5–10 minutes), a mood board or visual reference, and tell me about your target audience. I'll handle the rest.</p></div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <span class="font-semibold pr-8">How long does the process take?</span>
+                        <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Standard delivery is 5–7 business days for a 60–90 second trailer, depending on complexity and the number of revisions. Rush delivery is available for an additional fee.</p></div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <span class="font-semibold pr-8">Can I request revisions?</span>
+                        <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Absolutely! I provide 2–3 rounds of revisions to ensure the final result perfectly aligns with your vision. Additional revisions can be arranged if needed.</p></div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <span class="font-semibold pr-8">What formats do I receive?</span>
+                        <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">You'll receive MP4 4K, WebM, and formats optimized for Steam, YouTube, and social media. I also provide all master files and project files upon request.</p></div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <span class="font-semibold pr-8">Who owns the final trailer?</span>
+                        <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">You own 100% of the final trailer once payment is complete. I will not reuse or redistribute your project without explicit permission.</p></div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <span class="font-semibold pr-8">Do you offer music licensing?</span>
+                        <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Yes! I have access to premium royalty-free and licensed tracks that match your game's tone — from epic orchestral to synthwave. All music is cleared for commercial use.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CONTACT CTA ═══ -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-violet-900/50 via-fuchsia-900/50 to-cyan-900/50"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-4xl md:text-6xl font-black mb-6 reveal">Your Game Deserves a Trailer<br><span class="gradient-text">That Plays as Well as It Does</span></h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Send over a clip of your project, and let's discuss how to turn your viewers into players and your backers into believers.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal" style="transition-delay:0.2s">
+                <a href="mailto:owntrailerproject@gmail.com" class="group relative px-10 py-5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg overflow-hidden btn-glow w-full sm:w-auto">
+                    <span class="relative z-10 flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        <span>owntrailerproject@gmail.com</span>
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+                <a href="https://www.instagram.com/trailerproject_haeril/" target="_blank" rel="noopener noreferrer" class="px-10 py-5 rounded-full glass-card text-white font-semibold text-lg hover:bg-white/10 transition-all duration-300 w-full sm:w-auto flex items-center justify-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
+                    <span>DM on Instagram</span>
+                </a>
+            </div>
+            <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-white/60 reveal" style="transition-delay:0.3s">
+                <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>100% Confidential</span>
+                <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>Response < 24 Hours</span>
+                <span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>5.0 Star Rating</span>
             </div>
         </div>
     </section>
 
     <!-- ═══ FOOTER ═══ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="d-flex flex-column align-items-center gap-3">
-                <div class="footer-brand">TRAILER<span class="text-accent">PROJECT</span></div>
-                <div style="color:#555; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase;">
-                    Cinematic Game Trailers — Since 2020
+    <footer class="py-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+                <div class="lg:col-span-2">
+                    <a href="#" class="flex items-center space-x-3 mb-6">
+                        <div class="h-10 w-10 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                        </div>
+                        <span class="text-xl font-bold">Trailer Project</span>
+                    </a>
+                    <p class="text-gray-400 mb-6 max-w-xs">Cinematic game trailers that convert. From indie devs to studios — I deliver trailers that build hype and drive sales.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors"><span class="sr-only">Instagram</span><svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors"><span class="sr-only">YouTube</span><svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors"><span class="sr-only">Twitter</span><svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg></a>
+                    </div>
                 </div>
-                <div class="d-flex gap-3">
-                    <a href="https://www.instagram.com/trailerproject_haeril/" target="_blank" rel="noopener" style="color:#666; transition:color 0.2s; font-size:1.4rem;"><i class="bi bi-instagram"></i></a>
-                    <a href="mailto:owntrailerproject@gmail.com" style="color:#666; transition:color 0.2s; font-size:1.4rem;"><i class="bi bi-envelope-fill"></i></a>
-                </div>
-                <div style="color:#444; font-size:0.75rem; margin-top:10px;">
-                    &copy; 2026 Trailer Project Studio. All rights reserved.
-                </div>
+                <div><h4 class="font-semibold mb-4">Services</h4><ul class="space-y-3"><li><a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm">Steam Trailers</a></li><li><a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm">Kickstarter Promos</a></li><li><a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm">Social Ads</a></li><li><a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm">Launch Trailers</a></li><li><a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm">Sound Design</a></li></ul></div>
+                <div><h4 class="font-semibold mb-4">Resources</h4><ul class="space-y-3"><li><a href="#faq" class="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li><li><a href="#benefits" class="text-gray-400 hover:text-white transition-colors text-sm">Process</a></li><li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors text-sm">Pricing</a></li><li><a href="#contact" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li></ul></div>
+                <div><h4 class="font-semibold mb-4">Company</h4><ul class="space-y-3"><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">About</a></li><li><a href="#showcase" class="text-gray-400 hover:text-white transition-colors text-sm">Portfolio</a></li><li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors text-sm">Testimonials</a></li></ul></div>
+            </div>
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-sm">© 2026 Trailer Project. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">Made with 💜 for game developers everywhere</p>
             </div>
         </div>
     </footer>
 
-    <!-- ═══ VIDEO MODAL ═══ -->
-    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title text-white m-0"><i class="bi bi-film text-accent me-2"></i>Trailer Preview</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="ratio ratio-16x9">
-                        <iframe id="videoIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══ BACK TO TOP ═══ -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="bi bi-arrow-up"></i>
-    </button>
-
-    <!-- ═══ SCRIPTS ═══ -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+    <!-- ═══ JAVASCRIPT ═══ -->
     <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50
-        });
-
-        // Navbar shrink
-        const navbar = document.getElementById('mainNav');
+        // ── Navbar Scroll ──
+        const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
+                navbar.classList.remove('bg-transparent', 'py-6');
+                navbar.classList.add('glass-dark', 'py-4');
             } else {
-                navbar.classList.remove('scrolled');
+                navbar.classList.remove('glass-dark', 'py-4');
+                navbar.classList.add('bg-transparent', 'py-6');
             }
         });
 
-        // Smooth scroll & nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    window.scrollTo({
-                        top: target.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                    const nav = document.getElementById('navMenu');
-                    if (nav.classList.contains('show')) {
-                        new bootstrap.Collapse(nav).hide();
+        // ── Mobile Menu ──
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+        mobileBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('hidden');
+            mobileBtn.innerHTML = menuOpen ?
+                '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>' :
+                '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
+        });
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuOpen = false;
+                mobileBtn.innerHTML =
+                    '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
+            });
+        });
+
+        // ── Scroll Reveal ──
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        const staggerContainers = document.querySelectorAll('.stagger-children');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('stagger-children')) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.add('active');
                     }
                 }
             });
-        });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Active nav link
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.navbar-custom .nav-link');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
+        revealElements.forEach(el => revealObserver.observe(el));
+        staggerContainers.forEach(el => revealObserver.observe(el));
+
+        // ── FAQ Accordion ──
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const answer = btn.nextElementSibling;
+                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+                // Close all others
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    if (a !== answer) {
+                        a.style.maxHeight = '0px';
+                        a.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
+                    }
+                });
+
+                if (isOpen) {
+                    answer.style.maxHeight = '0px';
+                    btn.querySelector('svg').classList.remove('rotate-180');
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    btn.querySelector('svg').classList.add('rotate-180');
                 }
             });
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Video modal
-        const videoModal = document.getElementById('videoModal');
-        const videoIframe = document.getElementById('videoIframe');
-        videoModal.addEventListener('show.bs.modal', function(event) {
-            const trigger = event.relatedTarget;
-            const videoUrl = trigger.getAttribute('data-video');
-            if (videoUrl) {
-                videoIframe.src = videoUrl + '?autoplay=1&rel=0';
-            }
-        });
-        videoModal.addEventListener('hide.bs.modal', function() {
-            videoIframe.src = '';
-        });
-
-        // Back to Top
-        const backBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                backBtn.classList.add('show');
-            } else {
-                backBtn.classList.remove('show');
-            }
-        });
-        backBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
-
 </body>
 </html>
