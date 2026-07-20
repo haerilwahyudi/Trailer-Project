@@ -10,11 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ── Reset & Base ── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: #0a0a0f;
@@ -22,16 +19,9 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0f;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #7c3aed;
-            border-radius: 4px;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 4px; }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.04);
@@ -68,14 +58,12 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
             opacity: 0;
             transition: opacity 0.5s;
             pointer-events: none;
         }
-        .btn-glow:hover::before {
-            opacity: 1;
-        }
+        .btn-glow:hover::before { opacity: 1; }
         .card-hover {
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -99,89 +87,41 @@
             pointer-events: none;
             animation: ambientFloat 20s ease-in-out infinite alternate;
         }
-        .ambient-orb:nth-child(2) {
-            animation-delay: -5s;
-        }
-        .ambient-orb:nth-child(3) {
-            animation-delay: -10s;
-        }
+        .ambient-orb:nth-child(2) { animation-delay: -5s; }
+        .ambient-orb:nth-child(3) { animation-delay: -10s; }
         @keyframes ambientFloat {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(40px, -30px) scale(1.1);
-            }
-            66% {
-                transform: translate(-20px, 40px) scale(0.9);
-            }
-            100% {
-                transform: translate(30px, -20px) scale(1.05);
-            }
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 40px) scale(0.9); }
+            100% { transform: translate(30px, -20px) scale(1.05); }
         }
         @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-16px);
-            }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-16px); }
         }
         @keyframes float-slow {
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-10px) rotate(2deg);
-            }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
         }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        .animate-float-slow {
-            animation: float-slow 10s ease-in-out infinite;
-        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-slow { animation: float-slow 10s ease-in-out infinite; }
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in-up {
             animation: fadeInUp 0.7s ease-out forwards;
         }
         @keyframes ping {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            75%,
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
+            0% { transform: scale(1); opacity: 1; }
+            75%, 100% { transform: scale(2); opacity: 0; }
         }
-        .animate-ping {
-            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
+        .animate-ping { animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
         @keyframes bounce {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        .animate-bounce {
-            animation: bounce 2s ease-in-out infinite;
-        }
+        .animate-bounce { animation: bounce 2s ease-in-out infinite; }
 
         .reveal {
             opacity: 0;
@@ -210,49 +150,21 @@
             opacity: 1;
             transform: translateX(0);
         }
-        .stagger-children>* {
+        .stagger-children > * {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .stagger-children.active>*:nth-child(1) {
-            transition-delay: 0.05s;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-children.active>*:nth-child(2) {
-            transition-delay: 0.10s;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-children.active>*:nth-child(3) {
-            transition-delay: 0.15s;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-children.active>*:nth-child(4) {
-            transition-delay: 0.20s;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-children.active>*:nth-child(5) {
-            transition-delay: 0.25s;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-children.active>*:nth-child(6) {
-            transition-delay: 0.30s;
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .stagger-children.active > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(3) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(4) { transition-delay: 0.20s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(5) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(6) { transition-delay: 0.30s; opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
-            .glass-card {
-                backdrop-filter: blur(8px);
-            }
-            .ambient-orb {
-                filter: blur(60px);
-            }
+            .glass-card { backdrop-filter: blur(8px); }
+            .ambient-orb { filter: blur(60px); }
         }
     </style>
 </head>
@@ -431,7 +343,7 @@
         </div>
     </section>
 
-    <!-- ═══ SHOWCASE ═══ -->
+    <!-- ═══ SHOWCASE / PORTFOLIO ═══ -->
     <section id="showcase" class="py-24 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/20 to-transparent"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -456,7 +368,10 @@
                             <div class="flex text-yellow-400 text-sm mb-3"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><span class="text-slate-400 text-xs ml-2">5.0</span></div>
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Talented person with great communication. A great experience to work with him."</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Clear Communicator</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Detail Oriented</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
-                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between"><span class="text-white font-bold">$350.00</span><span class="text-slate-500 text-xs">Fixed Price</span></div>
+                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                                <span class="text-white font-bold">Contact for quote</span>
+                                <span class="text-slate-500 text-xs">Custom pricing</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -475,7 +390,10 @@
                             <div class="flex text-yellow-400 text-sm mb-3"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><span class="text-slate-400 text-xs ml-2">5.0</span></div>
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Excellent working with Haeril, will absolutely work with him again in the future!"</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Committed to Quality</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Movie Trailer</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
-                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between"><span class="text-white font-bold">$500.00</span><span class="text-slate-500 text-xs">Fixed Price</span></div>
+                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                                <span class="text-white font-bold">Contact for quote</span>
+                                <span class="text-slate-500 text-xs">Custom pricing</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -494,7 +412,10 @@
                             <div class="flex text-yellow-400 text-sm mb-3"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg><span class="text-slate-400 text-xs ml-2">5.0</span></div>
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Worked super quickly and took direction well. Highly reliable for storytelling."</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Reliable</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Collaborative</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Accountable</span></div>
-                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between"><span class="text-white font-bold">—</span><span class="text-slate-500 text-xs">Fixed Price</span></div>
+                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                                <span class="text-white font-bold">Contact for quote</span>
+                                <span class="text-slate-500 text-xs">Custom pricing</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -530,7 +451,7 @@
     </section>
 
     <!-- ═══ TESTIMONIALS ═══ -->
-    <section class="py-24 relative overflow-hidden">
+    <section id="testimonials" class="py-24 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-fuchsia-950/20 to-transparent"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
@@ -563,36 +484,36 @@
         </div>
     </section>
 
-    <!-- ═══ PRICING ═══ -->
+    <!-- ═══ PRICING (Custom — no fixed prices) ═══ -->
     <section id="pricing" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-amber-400 font-semibold text-sm uppercase tracking-wider">Pricing</span>
-                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">Simple, <span class="gradient-text">Project-Based</span></h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Every trailer is custom-quoted based on your footage, duration, and complexity. Here are our most popular packages.</p>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">Custom Pricing, <span class="gradient-text">Fair & Transparent</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Every project is unique. I'll give you a clear quote based on your footage, duration, and scope — no hidden fees, no surprises.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8 stagger-children" id="pricingGrid">
-                <div class="relative glass-card rounded-2xl p-8 card-hover">
-                    <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Starter</h3><p class="text-gray-400 text-sm">Perfect for indie devs on a budget</p></div>
-                    <div class="mb-6"><span class="text-5xl font-black">$350</span><span class="text-gray-400">/per project</span></div>
-                    <ul class="space-y-4 mb-8"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">60–90 second trailer</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">1080p export</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Basic sound design</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">2 rounds of revisions</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Steam & YouTube ready</span></li></ul>
-                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 glass-card hover:bg-white/10">Inquire Now</a>
+                <div class="glass-card rounded-2xl p-8 text-center card-hover">
+                    <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Starter</h3><p class="text-gray-400 text-sm">For indie devs with a clear vision</p></div>
+                    <div class="mb-6"><span class="text-5xl font-black gradient-text">Custom</span><span class="text-gray-400"> · based on scope</span></div>
+                    <ul class="space-y-4 mb-8 text-left"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">60–90 second trailer</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">1080p or 4K export</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">2–3 revision rounds</span></li></ul>
+                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 glass-card hover:bg-white/10">Reach Out</a>
                 </div>
-                <div class="relative glass-card rounded-2xl p-8 card-hover border-violet-500/50 shadow-lg shadow-violet-900/20">
+                <div class="glass-card rounded-2xl p-8 text-center card-hover border-violet-500/50 shadow-lg shadow-violet-900/20">
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 text-sm font-semibold">Most Popular</div>
                     <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Pro</h3><p class="text-gray-400 text-sm">For studios serious about marketing</p></div>
-                    <div class="mb-6"><span class="text-5xl font-black">$500</span><span class="text-gray-400">/per project</span></div>
-                    <ul class="space-y-4 mb-8"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">90–120 second trailer</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">4K export</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Advanced sound design</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">3 rounds of revisions</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Full color grading</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Social media cuts included</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Priority delivery</span></li></ul>
-                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white btn-glow">Inquire Now</a>
+                    <div class="mb-6"><span class="text-5xl font-black gradient-text">Custom</span><span class="text-gray-400"> · based on scope</span></div>
+                    <ul class="space-y-4 mb-8 text-left"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">90–120 second trailer</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">4K + vertical cuts</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">3+ revision rounds</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Priority delivery</span></li></ul>
+                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white btn-glow">Reach Out</a>
                 </div>
-                <div class="relative glass-card rounded-2xl p-8 card-hover">
-                    <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Studio</h3><p class="text-gray-400 text-sm">Custom packages for publishers</p></div>
-                    <div class="mb-6"><span class="text-5xl font-black">Custom</span><span class="text-gray-400">/quote based</span></div>
-                    <ul class="space-y-4 mb-8"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Multi-trailer packages</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">4K + vertical exports</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Premium sound design</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Unlimited revisions</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Dedicated collaboration</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Full project files</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">SLA guarantee</span></li></ul>
-                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 glass-card hover:bg-white/10">Contact Sales</a>
+                <div class="glass-card rounded-2xl p-8 text-center card-hover">
+                    <div class="mb-6"><h3 class="text-2xl font-bold mb-2">Studio</h3><p class="text-gray-400 text-sm">For publishers and larger teams</p></div>
+                    <div class="mb-6"><span class="text-5xl font-black gradient-text">Custom</span><span class="text-gray-400"> · based on scope</span></div>
+                    <ul class="space-y-4 mb-8 text-left"><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Multi-trailer packages</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">All formats + assets</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Unlimited revisions</span></li><li class="flex items-center space-x-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="text-gray-300">Dedicated support</span></li></ul>
+                    <a href="#contact" class="w-full block text-center py-4 rounded-full font-semibold transition-all duration-300 glass-card hover:bg-white/10">Reach Out</a>
                 </div>
             </div>
-            <div class="text-center mt-12 reveal"><p class="text-gray-400">Need a custom package? <a href="#contact" class="text-violet-400 hover:text-violet-300 font-medium underline underline-offset-4">Let's talk about your project</a></p></div>
+            <div class="text-center mt-12 reveal"><p class="text-gray-400">Not sure which tier fits? <a href="#contact" class="text-violet-400 hover:text-violet-300 font-medium underline underline-offset-4">Let's chat — I'll recommend what's best for your project.</a></p></div>
         </div>
     </section>
 
@@ -656,7 +577,7 @@
         <div class="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <h2 class="text-4xl md:text-6xl font-black mb-6 reveal">Your Game Deserves a Trailer<br><span class="gradient-text">That Plays as Well as It Does</span></h2>
-            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Send over a clip of your project, and let's discuss how to turn your viewers into players and your backers into believers.</p>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Send over a clip of your project, and let's discuss how to turn your viewers into players and your backers into believers. I'll give you a clear quote based on your scope.</p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal" style="transition-delay:0.2s">
                 <a href="mailto:owntrailerproject@gmail.com" class="group relative px-10 py-5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg overflow-hidden btn-glow w-full sm:w-auto">
                     <span class="relative z-10 flex items-center justify-center space-x-2">
@@ -732,20 +653,17 @@
                 '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>' :
                 '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
         });
-        // Close mobile menu on link click
         document.querySelectorAll('#mobileMenu a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
                 menuOpen = false;
-                mobileBtn.innerHTML =
-                    '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
+                mobileBtn.innerHTML = '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
             });
         });
 
         // ── Scroll Reveal ──
         const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
         const staggerContainers = document.querySelectorAll('.stagger-children');
-
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -757,7 +675,6 @@
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
         revealElements.forEach(el => revealObserver.observe(el));
         staggerContainers.forEach(el => revealObserver.observe(el));
 
@@ -767,15 +684,12 @@
             btn.addEventListener('click', () => {
                 const answer = btn.nextElementSibling;
                 const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
-
-                // Close all others
                 document.querySelectorAll('.faq-answer').forEach(a => {
                     if (a !== answer) {
                         a.style.maxHeight = '0px';
                         a.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
                     }
                 });
-
                 if (isOpen) {
                     answer.style.maxHeight = '0px';
                     btn.querySelector('svg').classList.remove('rotate-180');
