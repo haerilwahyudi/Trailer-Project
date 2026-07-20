@@ -387,8 +387,8 @@
             <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6 animate-fade-in-up" style="animation-delay:0.1s">
                 Most Games Fail<br>in the <span class="gradient-text">First 5 Seconds.</span>
             </h1>
-            <p class="text-lg sm:text-xl text-gray-400 max-w-4xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style="animation-delay:0.2s">
-                If you're a game developer or studio looking to transform raw gameplay into a high-converting, cinematic experience that drives Steam wishlists, successful Kickstarter campaigns, and sales — you've found the right editor. Your game deserves more than a screen recording set to music. You need a trailer built on psychology: sharp rhythmic cutting, immersive sound design, and tension that grabs the viewer by the eyes and doesn't let go. That's what I deliver.
+            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style="animation-delay:0.2s">
+                Transform raw gameplay into high-converting cinematic trailers that drive Steam wishlists, Kickstarter funding, and sales.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in-up" style="animation-delay:0.3s">
                 <a href="#showcase" class="group relative px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg overflow-hidden btn-glow w-full sm:w-auto">
@@ -404,7 +404,7 @@
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-purple-900/30">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10"></div>
                     <div class="yt-embed">
-                        <iframe src="https://www.youtube.com/embed/DYO77IxYvoI" title="Trailer Project Showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/DYO77IxYvoI?&vq=hd1080" title="Trailer Project Showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-2xl opacity-20 blur-2xl animate-float"></div>
                     <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full opacity-20 blur-xl animate-float-slow"></div>
@@ -578,7 +578,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Link ke video ke-4 sudah dihapus -->
         </div>
     </section>
 
@@ -895,7 +894,7 @@
         const closeBtn = document.getElementById('videoModalClose');
 
         function openModal(videoId) {
-            modalIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+            modalIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&vq=hd1080';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -906,7 +905,6 @@
             document.body.style.overflow = '';
         }
 
-        // Event listeners untuk semua elemen dengan class .video-thumbnail
         document.querySelectorAll('.video-thumbnail').forEach(el => {
             el.addEventListener('click', (e) => {
                 const videoId = el.dataset.video;
@@ -916,17 +914,12 @@
             });
         });
 
-        // Tutup modal dengan tombol close
         closeBtn.addEventListener('click', closeModal);
-
-        // Tutup modal dengan klik di luar konten
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
             }
         });
-
-        // Tutup modal dengan tombol ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal();
