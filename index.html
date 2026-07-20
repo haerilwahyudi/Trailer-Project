@@ -312,6 +312,60 @@
             padding-bottom: 56.25%;
         }
 
+        /* ── Thumbnail overlay ── */
+        .video-thumbnail-wrap {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .video-thumbnail-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .video-thumbnail-wrap:hover img {
+            transform: scale(1.05);
+        }
+        .video-thumbnail-wrap .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .video-thumbnail-wrap:hover .play-icon {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .video-thumbnail-wrap .play-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+            margin-left: 4px;
+        }
+        .video-thumbnail-wrap .duration {
+            position: absolute;
+            bottom: 10px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
             .glass-card {
                 backdrop-filter: blur(8px);
@@ -321,6 +375,14 @@
             }
             .video-modal {
                 padding: 10px;
+            }
+            .video-thumbnail-wrap .play-icon {
+                width: 48px;
+                height: 48px;
+            }
+            .video-thumbnail-wrap .play-icon svg {
+                width: 22px;
+                height: 22px;
             }
         }
     </style>
@@ -443,53 +505,47 @@
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Every cut is built on psychology, rhythm, and raw impact. Here’s exactly what you get.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children" id="servicesGrid">
-                <!-- 1. Steam-Compliant -->
                 <div class="glass-card rounded-2xl p-8 card-hover">
                     <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 mb-6 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Steam-Compliant Gameplay Trailers</h3>
-                    <p class="text-gray-400 leading-relaxed">A cinematic, store-ready trailer optimized to meet Steam's guidelines and engineered for one purpose: maximizing that initial hook-rate.</p>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Steam-Compliant Trailers</h3>
+                    <p class="text-gray-400 leading-relaxed">Cinematic, store-ready trailers optimized to meet Steam's guidelines and engineered to maximize hook-rate.</p>
                 </div>
-                <!-- 2. Teaser / Kickstarter -->
                 <div class="glass-card rounded-2xl p-8 card-hover">
                     <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-fuchsia-500 to-pink-500 mb-6 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Teaser Trailers & Kickstarter Promos</h3>
-                    <p class="text-gray-400 leading-relaxed">High-tension pacing and elite audio-visual synchronization designed to build massive pre-launch hype and crush your funding goals. You'll feel the energy the moment the first beat drops.</p>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Teaser & Kickstarter Promos</h3>
+                    <p class="text-gray-400 leading-relaxed">High-tension pacing and elite audio-visual synchronization to build pre-launch hype and crush funding goals.</p>
                 </div>
-                <!-- 3. Vertical Social Ads -->
                 <div class="glass-card rounded-2xl p-8 card-hover">
                     <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 mb-6 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Vertical Social Media Ads</h3>
-                    <p class="text-gray-400 leading-relaxed">Engaging short-form cuts tailored for TikTok, Shorts, and Reels — built to stop thumbs and send organic traffic directly to your Steam page.</p>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Vertical Social Ads</h3>
+                    <p class="text-gray-400 leading-relaxed">Short-form cuts for TikTok, Shorts, and Reels — built to stop thumbs and drive organic traffic.</p>
                 </div>
-                <!-- 4. Launch & Update Promos -->
                 <div class="glass-card rounded-2xl p-8 card-hover">
                     <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 mb-6 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-2M9 14l2 2 4-4" /></svg>
                     </div>
                     <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Launch & Update Promos</h3>
-                    <p class="text-gray-400 leading-relaxed">Dynamic milestone edits designed to re-energize your existing community and bring lapsed wishlisters back into the fold.</p>
+                    <p class="text-gray-400 leading-relaxed">Milestone edits designed to re-energize your community and bring lapsed wishlisters back.</p>
                 </div>
-                <!-- 5. Cinematic Color Grading -->
                 <div class="glass-card rounded-2xl p-8 card-hover">
                     <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 mb-6 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                     </div>
                     <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Cinematic Color Grading</h3>
-                    <p class="text-gray-400 leading-relaxed">Professional color correction and grading to give your trailer a polished, blockbuster look that stands out on every screen.</p>
+                    <p class="text-gray-400 leading-relaxed">Professional color correction and grading for a polished, blockbuster look.</p>
                 </div>
-                <!-- 6. Pro Sound Design -->
                 <div class="glass-card rounded-2xl p-8 card-hover">
                     <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500 to-red-500 mb-6 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                     </div>
                     <h3 class="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors">Pro Sound Design</h3>
-                    <p class="text-gray-400 leading-relaxed">Custom SFX layering, cinematic risers, impactful whooshes, and perfectly synced audio that makes every cut hit harder.</p>
+                    <p class="text-gray-400 leading-relaxed">Custom SFX, cinematic risers, and perfectly synced audio that hits hard.</p>
                 </div>
             </div>
             <div class="text-center mt-12 reveal">
@@ -514,11 +570,12 @@
                 <!-- Project 1 -->
                 <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
                     <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
-                        <div class="aspect-video bg-gradient-to-br from-violet-900/50 to-indigo-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden video-thumbnail" data-video="DYO77IxYvoI">
-                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                        <div class="video-thumbnail-wrap aspect-video" data-video="DYO77IxYvoI">
+                            <img src="https://img.youtube.com/vi/DYO77IxYvoI/maxresdefault.jpg" alt="Cinematic Trailer for Steam" loading="lazy" onerror="this.src='https://img.youtube.com/vi/DYO77IxYvoI/hqdefault.jpg'" />
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" /></svg>
                             </div>
-                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Putar video</span><span>▶</span></div>
+                            <span class="duration">0:30</span>
                         </div>
                         <div class="p-6">
                             <h3 class="text-lg font-bold text-white mb-1">Cinematic Trailer for Steam</h3>
@@ -527,7 +584,7 @@
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Talented person with great communication. A great experience to work with him."</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Clear Communicator</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Detail Oriented</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
                             <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail" data-video="DYO77IxYvoI">▶ Putar video</button>
+                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail-btn" data-video="DYO77IxYvoI">▶ Putar video</button>
                                 <span class="text-slate-500 text-xs">Custom pricing</span>
                             </div>
                         </div>
@@ -536,11 +593,12 @@
                 <!-- Project 2 -->
                 <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
                     <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
-                        <div class="aspect-video bg-gradient-to-br from-emerald-900/50 to-teal-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden video-thumbnail" data-video="6l3gMs3uK0E">
-                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                        <div class="video-thumbnail-wrap aspect-video" data-video="6l3gMs3uK0E">
+                            <img src="https://img.youtube.com/vi/6l3gMs3uK0E/maxresdefault.jpg" alt="Cinematic Trailer for Steam" loading="lazy" onerror="this.src='https://img.youtube.com/vi/6l3gMs3uK0E/hqdefault.jpg'" />
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" /></svg>
                             </div>
-                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Putar video</span><span>▶</span></div>
+                            <span class="duration">0:30</span>
                         </div>
                         <div class="p-6">
                             <h3 class="text-lg font-bold text-white mb-1">Cinematic Trailer for Steam</h3>
@@ -549,7 +607,7 @@
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Excellent working with Haeril, will absolutely work with him again in the future!"</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Committed to Quality</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Movie Trailer</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
                             <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail" data-video="6l3gMs3uK0E">▶ Putar video</button>
+                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail-btn" data-video="6l3gMs3uK0E">▶ Putar video</button>
                                 <span class="text-slate-500 text-xs">Custom pricing</span>
                             </div>
                         </div>
@@ -558,11 +616,12 @@
                 <!-- Project 3 -->
                 <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
                     <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
-                        <div class="aspect-video bg-gradient-to-br from-slate-900/50 to-violet-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden video-thumbnail" data-video="aeu8WyRaAa0">
-                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                        <div class="video-thumbnail-wrap aspect-video" data-video="aeu8WyRaAa0">
+                            <img src="https://img.youtube.com/vi/aeu8WyRaAa0/maxresdefault.jpg" alt="Video Editor — Travel & Sentimental" loading="lazy" onerror="this.src='https://img.youtube.com/vi/aeu8WyRaAa0/hqdefault.jpg'" />
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" /></svg>
                             </div>
-                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Putar video</span><span>▶</span></div>
+                            <span class="duration">0:30</span>
                         </div>
                         <div class="p-6">
                             <h3 class="text-lg font-bold text-white mb-1">Video Editor — Travel & Sentimental</h3>
@@ -571,7 +630,7 @@
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Worked super quickly and took direction well. Highly reliable for storytelling."</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Reliable</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Collaborative</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Accountable</span></div>
                             <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail" data-video="aeu8WyRaAa0">▶ Putar video</button>
+                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail-btn" data-video="aeu8WyRaAa0">▶ Putar video</button>
                                 <span class="text-slate-500 text-xs">Custom pricing</span>
                             </div>
                         </div>
@@ -581,7 +640,7 @@
         </div>
     </section>
 
-    <!-- ═══ BENEFITS / WHAT YOU CAN EXPECT ═══ -->
+    <!-- ═══ BENEFITS ═══ -->
     <section id="benefits" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -591,23 +650,23 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children" id="benefitsGrid">
                 <div class="glass-card rounded-2xl p-8 text-center card-hover">
                     <div class="text-4xl mb-4">💬</div>
-                    <h3 class="text-xl font-bold mb-3">Clear, Transparent Communication</h3>
-                    <p class="text-gray-400">No ghosting, ever. You'll always know where your project stands (backed by a verified 5.0-star rating).</p>
+                    <h3 class="text-xl font-bold mb-3">Clear Communication</h3>
+                    <p class="text-gray-400">No ghosting, ever. You'll always know where your project stands.</p>
                 </div>
                 <div class="glass-card rounded-2xl p-8 text-center card-hover">
                     <div class="text-4xl mb-4">📋</div>
-                    <h3 class="text-xl font-bold mb-3">Structured, Stress-Free Workflow</h3>
-                    <p class="text-gray-400">I'll guide you seamlessly from raw footage selection and storyboarding all the way to the final master export.</p>
+                    <h3 class="text-xl font-bold mb-3">Structured Workflow</h3>
+                    <p class="text-gray-400">From footage selection to final export — I guide you every step.</p>
                 </div>
                 <div class="glass-card rounded-2xl p-8 text-center card-hover">
                     <div class="text-4xl mb-4">⏱️</div>
                     <h3 class="text-xl font-bold mb-3">On-Time Delivery</h3>
-                    <p class="text-gray-400">Your marketing timeline is sacred. Deadlines are respected, period.</p>
+                    <p class="text-gray-400">Your marketing timeline is sacred. Deadlines are respected.</p>
                 </div>
                 <div class="glass-card rounded-2xl p-8 text-center card-hover">
                     <div class="text-4xl mb-4">🔄</div>
                     <h3 class="text-xl font-bold mb-3">Collaborative Revisions</h3>
-                    <p class="text-gray-400">A streamlined feedback process to refine every frame until it perfectly aligns with your vision.</p>
+                    <p class="text-gray-400">Refine every frame until it perfectly aligns with your vision.</p>
                 </div>
             </div>
         </div>
@@ -647,7 +706,7 @@
         </div>
     </section>
 
-    <!-- ═══ PRICING — SIMPLIFIED: START YOUR PROJECT ═══ -->
+    <!-- ═══ PRICING ═══ -->
     <section id="pricing" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -655,8 +714,6 @@
                 <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 reveal">Let's Build Your <span class="gradient-text">Cinematic Trailer</span></h2>
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Every game is unique — so every trailer should be too. Reach out and I'll personally walk you through the process, timeline, and investment tailored to your vision.</p>
             </div>
-
-            <!-- Single, clean CTA card -->
             <div class="max-w-3xl mx-auto reveal">
                 <div class="glass-card rounded-3xl p-10 md:p-14 text-center card-hover border-violet-500/30 shadow-2xl shadow-violet-900/20">
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 mb-8">
@@ -686,8 +743,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Small note -->
             <div class="text-center mt-12 reveal">
                 <p class="text-gray-500 text-sm">No hidden fees. No pressure. Just honest work and clear communication from day one.</p>
             </div>
@@ -714,21 +769,21 @@
                         <span class="font-semibold pr-8">How long does the process take?</span>
                         <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Standard delivery is 5–7 business days for a 60–90 second trailer, depending on complexity and the number of revisions. Rush delivery is available for an additional fee.</p></div>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Standard delivery is 5–7 business days for a 60–90 second trailer, depending on complexity and the number of revisions.</p></div>
                 </div>
                 <div class="glass-card rounded-xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
                         <span class="font-semibold pr-8">Can I request revisions?</span>
                         <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Absolutely! I provide 2–3 rounds of revisions to ensure the final result perfectly aligns with your vision. Additional revisions can be arranged if needed.</p></div>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Absolutely! I provide 2–3 rounds of revisions to ensure the final result perfectly aligns with your vision.</p></div>
                 </div>
                 <div class="glass-card rounded-xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
                         <span class="font-semibold pr-8">What formats do I receive?</span>
                         <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">You'll receive MP4 4K, WebM, and formats optimized for Steam, YouTube, and social media. I also provide all master files and project files upon request.</p></div>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">You'll receive MP4 4K, WebM, and formats optimized for Steam, YouTube, and social media.</p></div>
                 </div>
                 <div class="glass-card rounded-xl overflow-hidden">
                     <button class="faq-btn w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
@@ -742,7 +797,7 @@
                         <span class="font-semibold pr-8">Do you offer music licensing?</span>
                         <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Yes! I have access to premium royalty-free and licensed tracks that match your game's tone — from epic orchestral to synthwave. All music is cleared for commercial use.</p></div>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0"><p class="px-6 pb-5 text-gray-400">Yes! I have access to premium royalty-free and licensed tracks that match your game's tone — from epic orchestral to synthwave.</p></div>
                 </div>
             </div>
         </div>
@@ -905,25 +960,29 @@
             document.body.style.overflow = '';
         }
 
-        document.querySelectorAll('.video-thumbnail').forEach(el => {
+        // Click on thumbnail wrap
+        document.querySelectorAll('.video-thumbnail-wrap').forEach(el => {
             el.addEventListener('click', (e) => {
                 const videoId = el.dataset.video;
-                if (videoId) {
-                    openModal(videoId);
-                }
+                if (videoId) openModal(videoId);
+            });
+        });
+
+        // Click on "Putar video" button
+        document.querySelectorAll('.video-thumbnail-btn').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const videoId = el.dataset.video;
+                if (videoId) openModal(videoId);
             });
         });
 
         closeBtn.addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
+            if (e.target === modal) closeModal();
         });
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
-            }
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
         });
     </script>
 </body>
