@@ -264,12 +264,63 @@
             border: 0;
         }
 
+        /* ── Modal ── */
+        .video-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .video-modal.active {
+            display: flex;
+        }
+        .video-modal-content {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            background: #0a0a0f;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .video-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            line-height: 1;
+            padding: 0 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .video-modal-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .video-modal .yt-embed {
+            padding-bottom: 56.25%;
+        }
+
         @media (max-width: 768px) {
             .glass-card {
                 backdrop-filter: blur(8px);
             }
             .ambient-orb {
                 filter: blur(60px);
+            }
+            .video-modal {
+                padding: 10px;
             }
         }
     </style>
@@ -340,7 +391,7 @@
                 If you're a game developer or studio looking to transform raw gameplay into a high-converting, cinematic experience that drives Steam wishlists, successful Kickstarter campaigns, and sales — you've found the right editor. Your game deserves more than a screen recording set to music. You need a trailer built on psychology: sharp rhythmic cutting, immersive sound design, and tension that grabs the viewer by the eyes and doesn't let go. That's what I deliver.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in-up" style="animation-delay:0.3s">
-                <a href="https://youtu.be/DYO77IxYvoI" target="_blank" class="group relative px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg overflow-hidden btn-glow w-full sm:w-auto">
+                <a href="#showcase" class="group relative px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg overflow-hidden btn-glow w-full sm:w-auto">
                     <span class="relative z-10 flex items-center justify-center space-x-2"><span>Watch Showcase</span><svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></span>
                     <div class="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
@@ -460,15 +511,15 @@
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal" style="transition-delay:0.1s">Real client work — delivering results, not just edits.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8 stagger-children" id="showcaseGrid">
-                <!-- Project 1 → YouTube link 1 -->
+                <!-- Project 1 -->
                 <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
                     <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
-                        <a href="https://youtu.be/DYO77IxYvoI" target="_blank" class="block aspect-video bg-gradient-to-br from-violet-900/50 to-indigo-900/50 flex items-center justify-center relative overflow-hidden group/card">
-                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover/card:bg-white/30 transition-all duration-300 group-hover/card:scale-110">
+                        <div class="aspect-video bg-gradient-to-br from-violet-900/50 to-indigo-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden video-thumbnail" data-video="DYO77IxYvoI">
+                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                 <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                             </div>
-                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Watch on YouTube</span><span>▶</span></div>
-                        </a>
+                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Putar video</span><span>▶</span></div>
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-bold text-white mb-1">Cinematic Trailer for Steam</h3>
                             <p class="text-slate-400 text-sm mb-3"><svg class="inline w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>Jun 24 – Jul 2, 2026</p>
@@ -476,21 +527,21 @@
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Talented person with great communication. A great experience to work with him."</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Clear Communicator</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Detail Oriented</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
                             <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                                <a href="https://youtu.be/DYO77IxYvoI" target="_blank" class="text-white font-bold hover:text-violet-300 transition">Watch on YouTube →</a>
+                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail" data-video="DYO77IxYvoI">▶ Putar video</button>
                                 <span class="text-slate-500 text-xs">Custom pricing</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Project 2 → YouTube link 2 -->
+                <!-- Project 2 -->
                 <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
                     <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
-                        <a href="https://youtu.be/6l3gMs3uK0E" target="_blank" class="block aspect-video bg-gradient-to-br from-emerald-900/50 to-teal-900/50 flex items-center justify-center relative overflow-hidden group/card">
-                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover/card:bg-white/30 transition-all duration-300 group-hover/card:scale-110">
+                        <div class="aspect-video bg-gradient-to-br from-emerald-900/50 to-teal-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden video-thumbnail" data-video="6l3gMs3uK0E">
+                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                 <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                             </div>
-                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Watch on YouTube</span><span>▶</span></div>
-                        </a>
+                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Putar video</span><span>▶</span></div>
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-bold text-white mb-1">Cinematic Trailer for Steam</h3>
                             <p class="text-slate-400 text-sm mb-3"><svg class="inline w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>Jun 20 – Jun 24, 2026</p>
@@ -498,21 +549,21 @@
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Excellent working with Haeril, will absolutely work with him again in the future!"</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Committed to Quality</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Movie Trailer</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Game Trailer</span></div>
                             <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                                <a href="https://youtu.be/6l3gMs3uK0E" target="_blank" class="text-white font-bold hover:text-violet-300 transition">Watch on YouTube →</a>
+                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail" data-video="6l3gMs3uK0E">▶ Putar video</button>
                                 <span class="text-slate-500 text-xs">Custom pricing</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Project 3 → YouTube link 3 -->
+                <!-- Project 3 -->
                 <div class="group rounded-3xl bg-gradient-to-br p-[1px] transition-all duration-300 hover:scale-[1.02]" style="background-image:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(99,102,241,0.3))">
                     <div class="rounded-3xl bg-slate-900 overflow-hidden h-full transition-all duration-300 group-hover:bg-slate-800/90">
-                        <a href="https://youtu.be/aeu8WyRaAa0" target="_blank" class="block aspect-video bg-gradient-to-br from-slate-900/50 to-violet-900/50 flex items-center justify-center relative overflow-hidden group/card">
-                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover/card:bg-white/30 transition-all duration-300 group-hover/card:scale-110">
+                        <div class="aspect-video bg-gradient-to-br from-slate-900/50 to-violet-900/50 flex items-center justify-center cursor-pointer relative overflow-hidden video-thumbnail" data-video="aeu8WyRaAa0">
+                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                 <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                             </div>
-                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Watch on YouTube</span><span>▶</span></div>
-                        </a>
+                            <div class="absolute bottom-3 left-3 right-3 text-white/60 text-xs font-medium flex justify-between"><span>Putar video</span><span>▶</span></div>
+                        </div>
                         <div class="p-6">
                             <h3 class="text-lg font-bold text-white mb-1">Video Editor — Travel & Sentimental</h3>
                             <p class="text-slate-400 text-sm mb-3"><svg class="inline w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>Sep 9 – Nov 21, 2025</p>
@@ -520,14 +571,14 @@
                             <p class="text-slate-300 text-sm italic border-l-2 border-violet-500 pl-3 mb-3">"Worked super quickly and took direction well. Highly reliable for storytelling."</p>
                             <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Reliable</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Collaborative</span><span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-xs border border-white/5">Accountable</span></div>
                             <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                                <a href="https://youtu.be/aeu8WyRaAa0" target="_blank" class="text-white font-bold hover:text-violet-300 transition">Watch on YouTube →</a>
+                                <button class="text-white font-bold hover:text-violet-300 transition video-thumbnail" data-video="aeu8WyRaAa0">▶ Putar video</button>
                                 <span class="text-slate-500 text-xs">Custom pricing</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Link "watch another project" telah dihapus sesuai permintaan -->
+            <!-- Link ke video ke-4 sudah dihapus -->
         </div>
     </section>
 
@@ -726,6 +777,16 @@
         </div>
     </section>
 
+    <!-- ═══ VIDEO MODAL ═══ -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <button id="videoModalClose" class="video-modal-close">&times;</button>
+            <div class="yt-embed" id="modalVideoContainer">
+                <iframe id="modalIframe" src="" title="Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- ═══ FOOTER ═══ -->
     <footer class="py-16 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -826,6 +887,50 @@
                     btn.querySelector('svg').classList.add('rotate-180');
                 }
             });
+        });
+
+        // ── Video Modal ──
+        const modal = document.getElementById('videoModal');
+        const modalIframe = document.getElementById('modalIframe');
+        const closeBtn = document.getElementById('videoModalClose');
+
+        function openModal(videoId) {
+            modalIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalIframe.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event listeners untuk semua elemen dengan class .video-thumbnail
+        document.querySelectorAll('.video-thumbnail').forEach(el => {
+            el.addEventListener('click', (e) => {
+                const videoId = el.dataset.video;
+                if (videoId) {
+                    openModal(videoId);
+                }
+            });
+        });
+
+        // Tutup modal dengan tombol close
+        closeBtn.addEventListener('click', closeModal);
+
+        // Tutup modal dengan klik di luar konten
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Tutup modal dengan tombol ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
         });
     </script>
 </body>
